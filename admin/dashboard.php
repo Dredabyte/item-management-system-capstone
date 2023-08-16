@@ -47,7 +47,7 @@
               ?>
 
             </h3>
-            <p>Total Items</p>
+            <p>Total Stocks</p>
           </div>
           <div class="icon">
             <i class="fas fa-light fa-box"></i>
