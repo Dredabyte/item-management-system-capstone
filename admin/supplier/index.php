@@ -11,7 +11,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">Master Lists - Suppliers</h1>
-        <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+        <p class="mb-0">The Master Lists for Suppliers provide a comprehensive compilation including names, addresses, contact details, and availability status, if applicable. This consolidated information streamlines supplier management and enhances procurement efficiency.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">

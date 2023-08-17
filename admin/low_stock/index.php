@@ -11,7 +11,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">Low Stocks</h1>
-        <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+        <p class="mb-0">"Low Stock" indicates a minimal quantity of goods available, prompting the need for replenishment to ensure seamless operations and meet demand. This status serves as a trigger for timely restocking actions.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">

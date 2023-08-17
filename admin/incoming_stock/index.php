@@ -11,7 +11,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">Incoming Stocks</h1>
-        <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+        <p class="mb-0">Incoming stock entails the receipt of goods as part of a purchase order, ensuring seamless inventory replenishment. It also encompasses the receipt of items previously on backorder, contributing to efficient order fulfillment and inventory management.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -43,7 +43,7 @@
                   <th>ID</th>
                   <th>Date Created</th>
                   <th>From</th>
-                  <th>Items</th>
+                  <th>Item/s</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -72,8 +72,8 @@
                   <div class="dropdown-menu" role="menu">
                       <a class="dropdown-item" href="<?php echo base_url.'admin?page=incoming_stock/view_incoming_stock&id='.$row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-eye text-dark"></span> View</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="<?php echo base_url.'admin?page=incoming_stock/manage_incoming_stock&id='.$row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
-                      <div class="dropdown-divider"></div>
+                     <!-- <a class="dropdown-item" href="<?php echo base_url.'admin?page=incoming_stock/manage_incoming_stock&id='.$row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
+                      <div class="dropdown-divider"></div> -->
                       <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
                   </div>
                  </td>

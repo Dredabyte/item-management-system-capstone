@@ -1,3 +1,22 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Edit Purchase Order Details</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo base_url.'/admin?page=purchase_order_list' ?>">Purchase Order Lists</a></li>
+          <li class="breadcrumb-item active">Edit Purchase Order Details</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
 <?php 
 if(isset($_GET['id'])){
     $qry = $conn->query("SELECT p.*,s.name as supplier FROM purchase_order_list p inner join supplier_list s on p.supplier_id = s.id  where p.id = '{$_GET['id']}'");

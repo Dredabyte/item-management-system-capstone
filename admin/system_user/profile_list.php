@@ -9,7 +9,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Master Lists - Systems Users</h1>
-            <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+            <p class="mb-0">The Master Lists for Systems Users encompass vital details such as names, avatars, usernames, and user types. This centralized repository simplifies the management of users and provides a streamlined process for adding or editing user information.</p>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

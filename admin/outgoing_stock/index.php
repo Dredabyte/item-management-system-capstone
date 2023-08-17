@@ -11,7 +11,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Outgoing Stocks</h1>
-            <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+            <p class="mb-0">Outgoing stocks involve the distribution of goods to customers or requesters, finalizing the supply chain process and ensuring timely fulfillment of orders. This process plays a pivotal role in meeting customer demands and maintaining efficient inventory flow.</p>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

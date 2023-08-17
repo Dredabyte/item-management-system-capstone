@@ -9,7 +9,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">Purchase Order Lists</h1>
-        <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+        <p class="mb-0">In this section, you will find the purchase order list, a comprehensive compilation of purchase records. It encompasses crucial details such as item descriptions, quantities, mutually agreed-upon prices, and supplier information, ensuring accuracy and accountability.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -48,7 +48,7 @@
                   <th>Date Created</th>
                   <th>Purchase Order Code</th>
                   <th>Supplier Name</th>
-                  <th>Items</th>
+                  <th>Item/s</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>

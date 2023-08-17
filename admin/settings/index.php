@@ -4,7 +4,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">System Settings</h1>
-		<p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus velit praesentium minima, harum maiores asperiores deleniti veniam rerum maxime temporibus voluptas. Quas velit est voluptatum necessitatibus? Eos voluptate quaerat asperiores.</p>
+		<p class="mb-0">In this section, you will discover the fundamental settings to modify the system logo, website name, and cover photo within the login section.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">

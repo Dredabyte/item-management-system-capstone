@@ -275,10 +275,10 @@
   </aside>
 
 
-<script>
+<!--script>
     var page;
     $(document).ready(function(){
-        page = '<?php echo isset($_GET['page']) ? $_GET['page'] : 'dashboard' ?>';
+        page = '<-?php echo isset($_GET['page']) ? $_GET['page'] : 'dashboard' ?>';
         page = page.replace(/\//gi,'_');
 
         if($('.nav-link.nav-'+page).length > 0){
@@ -290,4 +290,21 @@
             parentTreeview.parent().addClass('menu-open');
         }
     });
+</script-->
+<script>
+    var page;
+    $(document).ready(function(){
+        page = '<?php echo isset($_GET['page']) ? $_GET['page'] : 'dashboard' ?>';
+        page = page.split('/')[0]; // Extract the main page before the first '/'
+
+        if($('.nav-link.nav-'+page).length > 0){
+            $('.nav-link.nav-'+page).addClass('active');
+            var parentTreeview = $('.nav-link.nav-'+page).closest('.nav-treeview');
+            var parentNav = parentTreeview.siblings('a');
+
+            parentNav.addClass('active');
+            parentTreeview.parent().addClass('menu-open');
+        }
+    });
 </script>
+
