@@ -69,7 +69,7 @@ if($qry->num_rows >0){
                 <tbody>
                     <?php 
                     $total = 0;
-                    $qry = $conn->query("SELECT b.*,i.name,i.description FROM `backorder_items` b inner join item_list i on b.item_id = i.id where b.bo_id = '{id}'");
+                    $qry = $conn->query("SELECT b.*,i.name,i.description FROM `backorder_items` b inner join item_list i on b.item_id = i.id where b.bo_id = '$id'");
                     while($row = $qry->fetch_assoc()):
                         $total += $row['total']
                     ?>
