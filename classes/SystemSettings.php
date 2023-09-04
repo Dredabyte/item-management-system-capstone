@@ -84,42 +84,56 @@ class SystemSettings extends DBConnection{
 				unset($uploaded_img);
 			}
 		}
-		if(isset($_FILES['cover']) && $_FILES['cover']['tmp_name'] != ''){
-			$fname = 'uploads/cover-'.time().'.png';
-			$dir_path =base_app. $fname;
+		if (isset($_FILES['cover']) && $_FILES['cover']['tmp_name'] != '') {
+			$fname = 'uploads/cover-' . time() . '.gif'; // Change the file extension to .gif
+			$dir_path = base_app . $fname;
 			$upload = $_FILES['cover']['tmp_name'];
 			$type = mime_content_type($upload);
-			$allowed = array('image/png','image/jpeg');
-			if(!in_array($type,$allowed)){
-				$resp['msg'].=" But Image failed to upload due to invalid file type.";
-			}else{
-				$new_height = 720; 
-				$new_width = 1280; 
+			$allowed = array('image/png', 'image/jpeg', 'image/gif'); // Add 'image/gif' to the allowed formats
+		
+			if (!in_array($type, $allowed)) {
+				$resp['msg'] .= " But Image failed to upload due to an invalid file type.";
+			} else {
+				$new_height = 720;
+				$new_width = 1280;
 		
 				list($width, $height) = getimagesize($upload);
 				$t_image = imagecreatetruecolor($new_width, $new_height);
-				$gdImg = ($type == 'image/png')? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
+		
+				// Handle GIF format
+				if ($type == 'image/gif') {
+					$gdImg = imagecreatefromgif($upload);
+				} else {
+					$gdImg = ($type == 'image/png') ? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
+				}
+		
 				imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-				if($gdImg){
-						if(is_file($dir_path))
+		
+				if ($gdImg) {
+					if (is_file($dir_path)) {
 						unlink($dir_path);
-						$uploaded_img = imagepng($t_image,$dir_path);
-						imagedestroy($gdImg);
-						imagedestroy($t_image);
-				}else{
-				$resp['msg'].=" But Image failed to upload due to unkown reason.";
+					}
+					$uploaded_img = imagegif($t_image, $dir_path); // Change to imagegif for GIF format
+					imagedestroy($gdImg);
+					imagedestroy($t_image);
+				} else {
+					$resp['msg'] .= " But Image failed to upload due to an unknown reason.";
 				}
 			}
-			if(isset($uploaded_img) && $uploaded_img == true){
-				if(isset($_SESSION['system_info']['cover'])){
+		
+			if (isset($uploaded_img) && $uploaded_img == true) {
+				if (isset($_SESSION['system_info']['cover'])) {
 					$qry = $this->conn->query("UPDATE system_info set meta_value = '{$fname}' where meta_field = 'cover' ");
-					if(is_file(base_app.$_SESSION['system_info']['cover'])) unlink(base_app.$_SESSION['system_info']['cover']);
-				}else{
+					if (is_file(base_app . $_SESSION['system_info']['cover'])) {
+						unlink(base_app . $_SESSION['system_info']['cover']);
+					}
+				} else {
 					$qry = $this->conn->query("INSERT into system_info set meta_value = '{$fname}',meta_field = 'cover' ");
 				}
 				unset($uploaded_img);
 			}
 		}
+		
 		
 		$update = $this->update_system_info();
 		$flash = $this->set_flashdata('success','System Info Successfully Updated.');
@@ -200,4 +214,3 @@ switch ($action) {
 		// echo $sysset->index();
 		break;
 }
-?>

@@ -155,10 +155,10 @@ if(isset($_GET['id'])){
                             <?php echo $row['description']; ?>
                             </td>
                             <td class="py-1 px-2 text-right cost">
-                            <?php echo number_format($row['price']); ?>
+                            <?php echo number_format($row['price'],2); ?>
                             </td>
                             <td class="py-1 px-2 text-right total">
-                            <?php echo number_format($row['total']); ?>
+                            <?php echo number_format($row['total'],2); ?>
                             </td>
                         </tr>
                         <?php endwhile; ?>
