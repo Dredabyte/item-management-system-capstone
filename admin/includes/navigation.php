@@ -235,7 +235,7 @@
 
               <!--System Users -->
               <li class="nav-item">
-                <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="nav-link nav-system_user_profile_list">
+                <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="nav-link nav-system_user">
                   <i class="nav-icon fas fa-users"></i>
                   <p>
                     System Users

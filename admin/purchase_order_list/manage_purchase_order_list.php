@@ -98,7 +98,7 @@ if(isset($_GET['id'])){
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="qty" class="control-label">Qty</label>
-                                <input type="number" step="any" class="form-control rounded-0" id="qty">
+                                <input type="number" step="1" min="0" class="form-control rounded-0" id="qty">
                             </div>
                         </div>
                         <div class="col-md-2 text-center">

@@ -292,6 +292,94 @@ function delete_requester(){
 
 	}
 
+
+	//save inventory_request
+	function save_ir(){
+		if(empty($_POST['id'])){
+			$prefix = "IR";
+			$code = sprintf("%'.04d",1);
+			while(true){
+				$check_code = $this->conn->query("SELECT * FROM `inventory_request_list` where ir_code ='".$prefix.'-'.$code."' ")->num_rows;
+				if($check_code > 0){
+					$code = sprintf("%'.04d",$code+1);
+				}else{
+					break;
+				}
+			}
+			$_POST['ir_code'] = $prefix."-".$code;
+		}
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id')) && !is_array($_POST[$k])){
+				if(!is_numeric($v))
+				$v= $this->conn->real_escape_string($v);
+				if(!empty($data)) $data .=", ";
+				$data .=" `{$k}` = '{$v}' ";
+			}
+		}
+		if(empty($id)){
+			$sql = "INSERT INTO `inventory_request_list` set {$data}";
+		}else{
+			$sql = "UPDATE `inventory_request_list` set {$data} where id = '{$id}'";
+		}
+		$save = $this->conn->query($sql);
+		if($save){
+			$resp['status'] = 'success';
+			if(empty($id))
+			$ir_id = $this->conn->insert_id;
+			else
+			$ir_id = $id;
+			$resp['id'] = $ir_id;
+			$data = "";
+			foreach($item_id as $k =>$v){
+				if(!empty($data)) $data .=", ";
+				$data .= "('{$ir_id}','{$v}','{$qty[$k]}','{$price[$k]}','{$unit[$k]}','{$total[$k]}')";
+			}
+			if(!empty($data)){
+				$this->conn->query("DELETE FROM `ir_items` where ir_id = '{$ir_id}'");
+				$save = $this->conn->query("INSERT INTO `ir_items` (`ir_id`,`item_id`,`quantity`,`price`,`unit`,`total`) VALUES {$data}");
+				if(!$save){
+					$resp['status'] = 'failed';
+					if(empty($id)){
+						$this->conn->query("DELETE FROM `inventory_request_list` where id '{$ir_id}'");
+					}
+					$resp['msg'] = 'Inventory Request has failed to save. Error: '.$this->conn->error;
+					// insert purchase_order's items
+					$resp['sql'] = "INSERT INTO `ir_items` (`ir_id`,`item_id`,`quantity`,`price`,`unit`,`total`) VALUES {$data}";
+				}
+			}
+		}else{
+			$resp['status'] = 'failed';
+			$resp['msg'] = 'An error occured. Error: '.$this->conn->error;
+		}
+		if($resp['status'] == 'success'){
+			if(empty($id)){
+				$this->settings->set_flashdata('success'," New Inventory Request was Successfully created.");
+			}else{
+				$this->settings->set_flashdata('success'," Inventory Request Details Successfully updated.");
+			}
+		}
+
+		return json_encode($resp);
+	}
+
+	//delete inventory_request
+	function delete_ir(){
+			extract($_POST);
+			$del = $this->conn->query("DELETE FROM `inventory_request_list` where id = '{$id}'");
+			if($del){
+				$resp['status'] = 'success';
+				$this->settings->set_flashdata('success',"Inventory Request Details  successfully deleted.");
+			}else{
+				$resp['status'] = 'failed';
+				$resp['error'] = $this->conn->error;
+			}
+			return json_encode($resp);
+	
+		}
+
+
 	// save incoming_stock
 	function save_incoming(){
 		if(empty($_POST['id'])){
@@ -929,6 +1017,12 @@ switch ($action) {
 	break;
 	case 'delete_po':
 		echo $Master->delete_po();
+	break;
+	case 'save_ir':
+		echo $Master->save_ir();
+	break;
+	case 'delete_ir':
+		echo $Master->delete_ir();
 	break;
 	case 'save_incoming':
 		echo $Master->save_incoming();

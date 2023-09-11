@@ -727,6 +727,48 @@ ALTER TABLE `stock_list`
   ADD CONSTRAINT `stock_list_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item_list` (`id`) ON DELETE CASCADE;
 COMMIT;
 
+
+
+CREATE TABLE `inventory_request_list` (
+  `id` int(100) NOT NULL,
+  `ir_code` varchar(100) NOT NULL,
+  `users_id` int(100) NOT NULL,
+  `amount` float NOT NULL,
+  `remarks` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = pending, 1 = edited, 2 =approved',
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `ir_items` (
+  `ir_id` int(100) NOT NULL,
+  `item_id` int(100) NOT NULL,
+  `quantity` int(100) NOT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `unit` varchar(100) NOT NULL,
+  `total` float NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `inventory_request_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_id` (`users_id`);
+
+ALTER TABLE `ir_items`
+  ADD KEY `ir_id` (`ir_id`),
+  ADD KEY `item_id` (`item_id`);
+  
+ALTER TABLE `inventory_request_list`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  
+ALTER TABLE `inventory_request_list`
+  ADD CONSTRAINT `inventory_request_list_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  
+ALTER TABLE `ir_items`
+  ADD CONSTRAINT `ir_items_ibfk_1` FOREIGN KEY (`ir_id`) REFERENCES `inventory_request_list` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ir_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item_list` (`id`) ON DELETE CASCADE;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
