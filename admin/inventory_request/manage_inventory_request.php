@@ -62,7 +62,10 @@ if (isset($_GET['id'])) {
                                 $users = $conn->query("SELECT * FROM `users` order by `firstname` asc");
                                 while ($row = $users->fetch_assoc()) :
                                 ?>
-                                    <option value="<?php echo $row['id'] ?>" <?php echo isset($users_id) && $users_id == $row['id'] ? "selected" : "" ?>><?php echo $row['firstname'] ?></option>
+                                    <option value="<?php echo $row['id'] ?>" <?php echo isset($users_id) && $users_id == $row['id'] ? "selected" : "" ?>>
+                                        <?php echo $row['firstname'] . ' ' . $row['lastname'] . ' (' . $row['role'] . ')' ?>
+                                    </option>
+
                                 <?php endwhile; ?>
                             </select>
                         </div>
@@ -75,7 +78,7 @@ if (isset($_GET['id'])) {
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="item_id" class="control-label">Item</label>
-                                <select name="item_id" id="item_id" class="custom-select ">
+                                <select name="item_id" id="item_id" class="custom-select select1">
                                     <option <?php echo !isset($item_id) ? 'selected' : '' ?> disabled></option>
                                     <?php
                                     $item = $conn->query("SELECT * FROM `item_list` order by `name` asc");
@@ -121,8 +124,6 @@ if (isset($_GET['id'])) {
                             <th class="text-center py-1 px-2">Qty</th>
                             <th class="text-center py-1 px-2">Unit</th>
                             <th class="text-center py-1 px-2">Item</th>
-                            <th class="text-center py-1 px-2">Cost</th>
-                            <th class="text-center py-1 px-2">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -183,7 +184,7 @@ if (isset($_GET['id'])) {
         </form>
     </div>
     <div class="card-footer py-1 text-center">
-        <button class="btn btn btn-primary" type="submit" form="po-form">Save</button>
+        <button class="btn btn btn-primary" type="submit" form="ir-form">Save</button>
         <a class="btn btn btn-dark" href="<?php echo base_url . '/admin?page=purchase_order_list' ?>">Cancel</a>
     </div>
 </div>
@@ -211,108 +212,5 @@ if (isset($_GET['id'])) {
     </tr>
 </table>
 <script>
-    // var items = $.parseJSON('< ?php echo json_encode($item_arr) ?>')
-    // var costs = $.parseJSON('</?php echo json_encode($cost_arr) ?>')
 
-
-    $(document).ready(function() {
-        // Initialize select2
-        $('.select2').select2();
-
-        // Add placeholder
-        $('.select2').select2({
-            placeholder: 'Search or select an option'
-        });
-
-
-        // Function to add an item to the list
-        function addItemToList() {
-            var item = $('#item_id').val();
-            var qty = $('#qty').val() > 0 ? $('#qty').val() : 0;
-            var unit = $('#unit').val();
-            var price = costs[item] || 0;
-            var total = parseFloat(qty) * parseFloat(price);
-            var item_name = items[item].name || 'N/A';
-            var item_description = items[item].description || 'N/A';
-            var tr = $('#clone_list tr').clone();
-
-            if (item == '' || qty == '' || unit == '') {
-                alert_toast('Form Item textfields are required.', 'warning');
-                return false;
-            }
-
-            if ($('table#list tbody').find('tr[data-id="' + item + '"]').length > 0) {
-                alert_toast('Item is already exists on the list.', 'error');
-                return false;
-            }
-
-            tr.find('[name="item_id[]"]').val(item);
-            tr.find('[name="unit[]"]').val(unit);
-            tr.find('[name="qty[]"]').val(qty);
-            tr.find('[name="price[]"]').val(price);
-            tr.find('[name="total[]"]').val(total);
-            tr.attr('data-id', item);
-            tr.find('.qty .visible').text(qty);
-            tr.find('.unit').text(unit);
-            tr.find('.item').html(item_name + '<br/>' + item_description);
-            tr.find('.cost').text(parseFloat(price).toLocaleString('en-US'));
-            tr.find('.total').text(parseFloat(total).toLocaleString('en-US'));
-
-            $('table#list tbody').append(tr);
-            calc();
-            $('#item_id').val('').trigger('change');
-            $('#qty').val('');
-            $('#unit').val('');
-
-            tr.find('.rem_row').click(function() {
-                rem($(this));
-            });
-
-            $('#users_id').attr('readonly', 'readonly');
-        }
-
-        // Bind the addItemToList function to the "Add to List" button click event
-        $('#add_to_list').click(function() {
-            addItemToList();
-        });
-
-        // ... (Other code)
-
-    });
-
-
-    /*function calc() {
-        var sub_total = 0;
-        var grand_total = 0;
-        var discount = 0;
-        var tax = 0;
-        $('table#list tbody input[name="total[]"]').each(function() {
-            sub_total += parseFloat($(this).val())
-
-        })
-        $('table#list tfoot .sub-total').text(parseFloat(sub_total).toLocaleString('en-US', {
-            style: 'decimal',
-            maximumFractionDigit: 2
-        }))
-        var discount = sub_total * (parseFloat($('[name="discount_perc"]').val()) / 100)
-        sub_total = sub_total - discount;
-        var tax = sub_total * (parseFloat($('[name="tax_perc"]').val()) / 100)
-        grand_total = sub_total + tax
-        $('.discount').text(parseFloat(discount).toLocaleString('en-US', {
-            style: 'decimal',
-            maximumFractionDigit: 2
-        }))
-        $('[name="discount"]').val(parseFloat(discount))
-        $('.tax').text(parseFloat(tax).toLocaleString('en-US', {
-            style: 'decimal',
-            maximumFractionDigit: 2
-        }))
-        $('[name="tax"]').val(parseFloat(tax))
-        $('table#list tfoot .grand-total').text(parseFloat(grand_total).toLocaleString('en-US', {
-            style: 'decimal',
-            maximumFractionDigit: 2
-        }))
-        $('[name="amount"]').val(parseFloat(grand_total))
-
-    }*/
 </script>

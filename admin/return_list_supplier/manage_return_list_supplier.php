@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="qty" class="control-label">Quantity</label>
-                                <input type="number" step="any" class="form-control rounded-0" id="qty">
+                                <input type="number" min="0" step="any" class="form-control rounded-0" id="qty">
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
                         <?php
                         $total = 0;
                         if (isset($id)) :
-                            $qry = $conn->query("SELECT s.*,i.name,i.description FROM `stock_list` s inner join item_list i on s.item_id = i.id where s.id in ({$stock_ids})");
+                            $qry = $conn->query("SELECT s.*,i.name,i.description FROM `stock_list` s inner join item_list i on s.item_id = i.id where s.id in ({stock_ids})");
                             while ($row = $qry->fetch_assoc()) :
                                 $total += $row['total']
                         ?>

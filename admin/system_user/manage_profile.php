@@ -99,7 +99,7 @@
                     <div class="card-footer">
                         <div class="col-md-12">
                             <div class="row">
-                                <button class="btn btn-sm btn-primary mr-2" form="manage-user">Save</button>
+                                <button class="btn btn-sm btn-primary mr-2" form="manage-user">Create</button>
                                 <a class="btn btn-sm btn-secondary" href=".?page=system_user/profile_list">Cancel</a>
                             </div>
 			            </div>

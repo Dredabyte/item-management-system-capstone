@@ -40,7 +40,7 @@ if(isset($_GET['id'])){
         box-shadow: none;
     }
 </style>
-<div class="card card-outline card-primary">
+<div class="card card-outline card-navy">
     <div class="card-header">
         <h4 class="card-title"><?php echo isset($id) ? "Purchase Order Details - ".$po_code : 'Create New Purchase Order' ?></h4>
     </div>

@@ -85,6 +85,16 @@
                   </p>
                 </a>
               </li>
+
+              <!--Dispense Product -->
+              <li class="nav-item">
+                <a href="<?php echo base_url ?>admin/?page=dispense" class="nav-link nav-dispense">
+                  <i class="nav-icon fas fa-share-from-square"></i>
+                  <p>
+                    Dispense Product List
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
           <!--Order Lists End-->

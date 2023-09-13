@@ -25,7 +25,7 @@ if($qry->num_rows >0){
     }
 }
 ?>
-<div class="card card-outline card-primary">
+<div class="card card-outline card-navy">
     <div class="card-header">
         <h4 class="card-title">Purchase Order Details - <?php echo $po_code ?></h4>
     </div>

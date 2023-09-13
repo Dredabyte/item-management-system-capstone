@@ -46,7 +46,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 		</div>
 		<div class="form-group">
 			<label for="cost" class="control-label">Cost</label>
-			<input type="number" name="cost" id="cost" step="any" class="form-control rounded-0 text-end" value="<?php echo isset($cost) ? $cost : ''; ?>">
+			<input type="number" name="cost" id="cost" step="any" min="0" class="form-control rounded-0 text-end" value="<?php echo isset($cost) ? $cost : ''; ?>">
 		</div>
 		<div class="form-group">
 			<label for="supplier_id" class="control-label">Supplier Name</label>

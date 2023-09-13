@@ -38,7 +38,7 @@
                 echo $conn->query("SELECT * FROM `item_list` where id != 1 ")->num_rows;
               ?>
             </h3>
-            <p>Items Lists</p>
+            <p>Items List</p>
           </div>
           <div class="icon">
             <i class="fas fa-warehouse"></i>
@@ -60,7 +60,7 @@
       <div class="col-12">
         <div class="card card-outline card-primary">
           <div class="card-header">
-            <h3 class="card-title">Items Lists</h3>
+            <h3 class="card-title">Items List</h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="javascript:void(0)" id="create_new" class="btn btn-block btn-outline-dark">
