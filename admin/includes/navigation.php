@@ -57,7 +57,7 @@
             </a>
             <ul class="nav nav-treeview">
             <!--Inventory Request -->
-            <li class="nav-item">
+              <li class="nav-item">
                 <a href="<?php echo base_url ?>admin/?page=inventory_request" class="nav-link nav-inventory_request">
                   <i class="nav-icon fas fa-solid fa-envelope-open-text"></i>
                   <p>
@@ -119,14 +119,14 @@
               </li>   
               
               <!--Return List-Requester -->
-              <li class="nav-item">
-                <a href="<?php echo base_url ?>admin/?page=return_list_requester" class="nav-link nav-return_list_requester">
+              <!--<li class="nav-item">
+                <a href="<-?php echo base_url ?>admin/?page=return_list_requester" class="nav-link nav-return_list_requester">
                   <i class="nav-icon fas fa-rotate-right"></i>
                   <p>
                     Return List - Requesters
                   </p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <!--Return List End-->          

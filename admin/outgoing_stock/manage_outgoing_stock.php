@@ -246,7 +246,7 @@ if (isset($_GET['id'])) {
             $('[name="discount_perc"],[name="tax_perc"]').on('input', function() {
                 calc()
             })
-            $('#supplier_id').attr('readonly', 'readonly')
+            $('#requester_id').attr('readonly', 'readonly')
         })
         $('#sale-form').submit(function(e) {
             e.preventDefault();
@@ -290,8 +290,8 @@ if (isset($_GET['id'])) {
 
         if ('<?php echo isset($id) && $id > 0 ?>' == 1) {
             calc()
-            $('#supplier_id').trigger('change')
-            $('#supplier_id').attr('readonly', 'readonly')
+            $('#requester_id').trigger('change')
+            $('#requester_id').attr('readonly', 'readonly')
             $('table#list tbody tr .rem_row').click(function() {
                 rem($(this))
             })
@@ -302,7 +302,7 @@ if (isset($_GET['id'])) {
         _this.closest('tr').remove()
         calc()
         if ($('table#list tbody tr').length <= 0)
-            $('#supplier_id').removeAttr('readonly')
+            $('#requester_id').removeAttr('readonly')
 
     }
 

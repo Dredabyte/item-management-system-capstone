@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['id'])) {
-    $qry = $conn->query("SELECT r.*,s.name as requester FROM return_list_requester r inner join requester_list s on r.requester_id = s.id  where r.id = '{$_GET['id']}'");
+    $qry = $conn->query("SELECT * FROM return_list_requester where id = '{$_GET['id']}'");
     if ($qry->num_rows > 0) {
         foreach ($qry->fetch_array() as $k => $v) {
             $$k = $v;
@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
                         $cost_arr = array();
                         $item = $conn->query("SELECT * FROM `item_list` where status = 1 order by `name` asc");
                         while ($row = $item->fetch_assoc()) :
-                            $item_arr[$row['supplier_id']][$row['id']] = $row;
+                            $item_arr[$row['id']] = $row;
                             $cost_arr[$row['id']] = $row['cost'];
                         endwhile;
                         ?>
@@ -67,6 +67,9 @@ if (isset($_GET['id'])) {
                                 <label for="item_id" class="control-label">Item</label>
                                 <select id="item_id" class="custom-select ">
                                     <option disabled selected></option>
+                                    <?php foreach ($item_arr as $k => $v) : ?>
+                                        <option value="<?php echo $k ?>"> <?php echo $v['name'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -79,7 +82,7 @@ if (isset($_GET['id'])) {
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="qty" class="control-label">Quantity</label>
-                                <input type="number" step="any" class="form-control rounded-0" id="qty">
+                                <input type="number" min="0" step="any" class="form-control rounded-0" id="qty">
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
@@ -112,7 +115,7 @@ if (isset($_GET['id'])) {
                         <?php
                         $total = 0;
                         if (isset($id)) :
-                            $qry = $conn->query("SELECT s.*,i.name,i.description FROM `stock_list` s inner join item_list i on s.item_id = i.id where s.id in ({$stock_ids})");
+                            $qry = $conn->query("SELECT s.*,i.name,i.description FROM `stock_list` s inner join item_list i on s.item_id = i.id where s.id in ($stock_ids)");
                             while ($row = $qry->fetch_assoc()) :
                                 $total += $row['total']
                         ?>
@@ -202,53 +205,15 @@ if (isset($_GET['id'])) {
             placeholder: "Please select here",
             width: 'resolve',
         })
-        $('#item_id').select2({
-            placeholder: "Please select supplier first",
-            width: 'resolve',
-        })
-
-        $('#supplier_id').change(function() {
-            var supplier_id = $(this).val()
-            $('#item_id').select2('destroy')
-            if (!!items[supplier_id]) {
-                $('#item_id').html('')
-                var list_item = new Promise(resolve => {
-                    Object.keys(items[supplier_id]).map(function(k) {
-                        var row = items[supplier_id][k]
-                        var opt = $('<option>')
-                        opt.attr('value', row.id)
-                        opt.text(row.name)
-                        $('#item_id').append(opt)
-                    })
-                    resolve()
-                })
-                list_item.then(function() {
-                    $('#item_id').select2({
-                        placeholder: "Please select item here",
-                        width: 'resolve',
-                    })
-                })
-            } else {
-                list_item.then(function() {
-                    $('#item_id').select2({
-                        placeholder: "No Items Listed yet",
-                        width: 'resolve',
-                    })
-                })
-            }
-
-        })
-
         $('#add_to_list').click(function() {
-            var requester = $('#requester_id').val()
             var item = $('#item_id').val()
             var qty = $('#qty').val() > 0 ? $('#qty').val() : 0;
             var unit = $('#unit').val()
             var price = costs[item] || 0
             var total = parseFloat(qty) * parseFloat(price)
             // console.log(supplier,item)
-            var item_name = items[requester][item].name || 'N/A';
-            var item_description = items[requester][item].description || 'N/A';
+            var item_name = items[item].name || 'N/A';
+            var item_description = items[item][item].description || 'N/A';
             var tr = $('#clone_list tr').clone()
             if (item == '' || qty == '' || unit == '') {
                 alert_toast('Form Item textfields are required.', 'warning');
@@ -325,8 +290,8 @@ if (isset($_GET['id'])) {
 
         if ('<?php echo isset($id) && $id > 0 ?>' == 1) {
             calc()
-            $('#supplier_id').trigger('change')
-            $('#supplier_id').attr('readonly', 'readonly')
+            $('#requester_id').trigger('change')
+            $('#requester_id').attr('readonly', 'readonly')
             $('table#list tbody tr .rem_row').click(function() {
                 rem($(this))
             })
@@ -337,7 +302,7 @@ if (isset($_GET['id'])) {
         _this.closest('tr').remove()
         calc()
         if ($('table#list tbody tr').length <= 0)
-            $('#supplier_id').removeAttr('readonly')
+            $('#requester_id').removeAttr('readonly')
 
     }
 

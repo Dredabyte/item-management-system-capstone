@@ -296,7 +296,7 @@ function delete_requester(){
 	//save inventory_request
 	function save_ir(){
 		if(empty($_POST['id'])){
-			$prefix = "IR";
+			$prefix = "Inventory Request";
 			$code = sprintf("%'.04d",1);
 			while(true){
 				$check_code = $this->conn->query("SELECT * FROM `inventory_request_list` where ir_code ='".$prefix.'-'.$code."' ")->num_rows;
@@ -332,23 +332,23 @@ function delete_requester(){
 			$ir_id = $id;
 			$resp['id'] = $ir_id;
 			$data = "";
-			foreach($item_id as $k =>$v){
-				if(!empty($data)) $data .=", ";
-				$data .= "('{$ir_id}','{$v}','{$qty[$k]}','{$price[$k]}','{$unit[$k]}','{$total[$k]}')";
-			}
-			if(!empty($data)){
-				$this->conn->query("DELETE FROM `ir_items` where ir_id = '{$ir_id}'");
-				$save = $this->conn->query("INSERT INTO `ir_items` (`ir_id`,`item_id`,`quantity`,`price`,`unit`,`total`) VALUES {$data}");
-				if(!$save){
-					$resp['status'] = 'failed';
-					if(empty($id)){
-						$this->conn->query("DELETE FROM `inventory_request_list` where id '{$ir_id}'");
-					}
-					$resp['msg'] = 'Inventory Request has failed to save. Error: '.$this->conn->error;
-					// insert purchase_order's items
-					$resp['sql'] = "INSERT INTO `ir_items` (`ir_id`,`item_id`,`quantity`,`price`,`unit`,`total`) VALUES {$data}";
+			$sids = array();
+			$get = $this->conn->query("SELECT * FROM `inventory_request_list` where id = '{$ir_id}'");
+			if($get->num_rows > 0){
+				$res = $get->fetch_array();
+				if(!empty($res['ir_stock_ids'])){
+					$this->conn->query("DELETE FROM `ir_stock_list` where id in ({$res['ir_stock_ids']}) ");
 				}
 			}
+			foreach($item_id as $k =>$v){
+				$sql = "INSERT INTO `ir_stock_list` set item_id='{$v}', `quantity` = '{$qty[$k]}', `unit` = '{$unit[$k]}', `price` = '{$price[$k]}', `total` = '{$total[$k]}', `type` = 1 ";
+				$save = $this->conn->query($sql);
+				if($save){
+					$sids[] = $this->conn->insert_id;
+				}
+			}
+			$sids = implode(',',$sids);
+			$this->conn->query("UPDATE `inventory_request_list` set ir_stock_ids = '{$sids}' where id = '{$ir_id}'");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['msg'] = 'An error occured. Error: '.$this->conn->error;
@@ -357,7 +357,7 @@ function delete_requester(){
 			if(empty($id)){
 				$this->settings->set_flashdata('success'," New Inventory Request was Successfully created.");
 			}else{
-				$this->settings->set_flashdata('success'," Inventory Request Details Successfully updated.");
+				$this->settings->set_flashdata('success'," Inventory Request's Successfully updated.");
 			}
 		}
 
@@ -366,18 +366,25 @@ function delete_requester(){
 
 	//delete inventory_request
 	function delete_ir(){
-			extract($_POST);
-			$del = $this->conn->query("DELETE FROM `inventory_request_list` where id = '{$id}'");
-			if($del){
-				$resp['status'] = 'success';
-				$this->settings->set_flashdata('success',"Inventory Request Details  successfully deleted.");
-			}else{
-				$resp['status'] = 'failed';
-				$resp['error'] = $this->conn->error;
-			}
-			return json_encode($resp);
-	
+		extract($_POST);
+		$get = $this->conn->query("SELECT * FROM inventory_request_list where id = '{$id}'");
+		if($get->num_rows > 0){
+			$res = $get->fetch_array();
 		}
+		$del = $this->conn->query("DELETE FROM `inventory_request_list` where id = '{$id}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success',"Inventory Request's Successfully deleted.");
+			if(isset($res)){
+				$this->conn->query("DELETE FROM `inventory_request_list` where id in ({$res['ir_stock_ids']})");
+			}
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
 
 
 	// save incoming_stock
@@ -731,7 +738,7 @@ function delete_requester(){
 				}
 			}
 			foreach($item_id as $k =>$v){
-				$sql = "INSERT INTO `stock_list` set item_id='{$v}', `quantity` = '{$qty[$k]}', `unit` = '{$unit[$k]}', `price` = '{$price[$k]}', `total` = '{$total[$k]}', `type` = 2 ";
+				$sql = "INSERT INTO `stock_list` set item_id='{$v}', `quantity` = '{$qty[$k]}', `unit` = '{$unit[$k]}', `price` = '{$price[$k]}', `total` = '{$total[$k]}', `type` = 1 ";
 				$save = $this->conn->query($sql);
 				if($save){
 					$sids[] = $this->conn->insert_id;

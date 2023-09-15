@@ -264,6 +264,23 @@ INSERT INTO `sales_list` (`id`, `sales_code`, `client`, `amount`, `remarks`, `st
 
 -- --------------------------------------------------------
 */
+
+--
+-- Table structure for table `inventory_request_list`
+--
+
+
+CREATE TABLE `inventory_request_list` (
+  `id` int(100) NOT NULL,
+  `ir_code` varchar(100) NOT NULL,
+  `users_id` int(100) NOT NULL,
+  `amount` float NOT NULL DEFAULT 0,
+  `remarks` text DEFAULT NULL,
+  `ir_stock_ids` text NOT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Table structure for table `stock_list`
 --
@@ -299,6 +316,21 @@ INSERT INTO `stock_list` (`id`, `item_id`, `quantity`, `unit`, `price`, `total`,
 (26, 4, 25, 'boxes', 205, 5125, 2, '2021-11-03 14:08:27');
 */
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `ir_stock_list`
+--
+
+CREATE TABLE `ir_stock_list` (
+  `id` int(100) NOT NULL,
+  `item_id` int(100) NOT NULL,
+  `quantity` int(100) NOT NULL,
+  `unit` varchar(250) DEFAULT NULL,
+  `price` float NOT NULL DEFAULT 0,
+  `total` float NOT NULL DEFAULT current_timestamp(),
+  `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1=listed',
+  `date_created` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Table structure for table `supplier_list`
@@ -514,9 +546,23 @@ ALTER TABLE `outgoing_list`
   ADD KEY `requester_id` (`requester_id`);
 
 --
+-- Indexes for table `inventory_request_list`
+--
+ALTER TABLE `inventory_request_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_id` (`users_id`);
+
+--
 -- Indexes for table `stock_list`
 --
 ALTER TABLE `stock_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
+-- Indexes for table `ir_stock_list`
+--
+ALTER TABLE `ir_stock_list`
   ADD PRIMARY KEY (`id`),
   ADD KEY `item_id` (`item_id`);
 
@@ -617,11 +663,25 @@ ALTER TABLE `return_list_requester`
 ALTER TABLE `outgoing_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
+
+--
+-- AUTO_INCREMENT for table `inventory_request_list`
+--
+ALTER TABLE `inventory_request_list`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `stock_list`
 --
 ALTER TABLE `stock_list`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+
+--
+-- AUTO_INCREMENT for table `ir_stock_list`
+--
+ALTER TABLE `ir_stock_list`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `supplier_list`
@@ -720,53 +780,26 @@ ALTER TABLE `return_list_requester`
 ALTER TABLE `outgoing_list`
   ADD CONSTRAINT `outgoing_list_ibfk_1` FOREIGN KEY (`requester_id`) REFERENCES `requester_list` (`id`) ON DELETE CASCADE;
 
+
+--
+-- Constraints for table `inventory_request_list`
+--
+ALTER TABLE `inventory_request_list`
+  ADD CONSTRAINT `inventory_request_list_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
 --
 -- Constraints for table `stock_list`
 --
 ALTER TABLE `stock_list`
   ADD CONSTRAINT `stock_list_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item_list` (`id`) ON DELETE CASCADE;
+
+
+--
+-- Constraints for table `ir_stock_list`
+--
+ALTER TABLE `ir_stock_list`
+  ADD CONSTRAINT `ir_stock_list_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item_list` (`id`) ON DELETE CASCADE;
 COMMIT;
-
-
-
-CREATE TABLE `inventory_request_list` (
-  `id` int(100) NOT NULL,
-  `ir_code` varchar(100) NOT NULL,
-  `users_id` int(100) NOT NULL,
-  `amount` float NOT NULL,
-  `remarks` text NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 = pending, 1 = edited, 2 =approved',
-  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
-  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-CREATE TABLE `ir_items` (
-  `ir_id` int(100) NOT NULL,
-  `item_id` int(100) NOT NULL,
-  `quantity` int(100) NOT NULL,
-  `price` float NOT NULL DEFAULT 0,
-  `unit` varchar(100) NOT NULL,
-  `total` float NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-ALTER TABLE `inventory_request_list`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `users_id` (`users_id`);
-
-ALTER TABLE `ir_items`
-  ADD KEY `ir_id` (`ir_id`),
-  ADD KEY `item_id` (`item_id`);
-  
-ALTER TABLE `inventory_request_list`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-  
-ALTER TABLE `inventory_request_list`
-  ADD CONSTRAINT `inventory_request_list_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-  
-ALTER TABLE `ir_items`
-  ADD CONSTRAINT `ir_items_ibfk_1` FOREIGN KEY (`ir_id`) REFERENCES `inventory_request_list` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `ir_items_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `item_list` (`id`) ON DELETE CASCADE;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

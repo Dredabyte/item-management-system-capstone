@@ -112,7 +112,7 @@ if (isset($_GET['id'])) {
                         <?php
                         $total = 0;
                         if (isset($id)) :
-                            $qry = $conn->query("SELECT s.*,i.name,i.description FROM `stock_list` s inner join item_list i on s.item_id = i.id where s.id in ({stock_ids})");
+                            $qry = $conn->query("SELECT s.*,i.name,i.description FROM `stock_list` s inner join item_list i on s.item_id = i.id where s.id in ($stock_ids)");
                             while ($row = $qry->fetch_assoc()) :
                                 $total += $row['total']
                         ?>

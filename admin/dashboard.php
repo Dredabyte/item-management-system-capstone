@@ -33,19 +33,22 @@
         <div class="small-box bg-primary">
           <div class="inner">
             <h3>
-              <?php
-              $totalQuantity = 0;
+            <?php
+              $totalIn = 0;
+              $totalOut = 0;
+              $resultIn = $conn->query("SELECT SUM(quantity) as total FROM stock_list WHERE type = 1");
 
-              $qry = $conn->query("SELECT * FROM `stock_list` where id != 1");
-              while ($row = $qry->fetch_assoc()) {
-                $totalQuantity += $row['quantity'];
+              if ($resultIn && $resultIn->num_rows > 0) {
+                $totalIn = $resultIn->fetch_assoc()['total'];
               }
+              $resultOut = $conn->query("SELECT SUM(quantity) as total FROM stock_list WHERE type = 2");
 
-              $formattedTotal = number_format($totalQuantity);
-
-              echo $formattedTotal;
+              if ($resultOut && $resultOut->num_rows > 0) {
+                $totalOut = $resultOut->fetch_assoc()['total'];
+              }
+              $remainingAvailable = $totalIn - $totalOut;
               ?>
-
+              <?php echo number_format($remainingAvailable) ?>
             </h3>
             <p>Total Stocks</p>
           </div>
@@ -117,7 +120,7 @@
       <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-lightblue">
+          <div class="small-box bg-teal">
             <div class="inner">
               <h3>
                 <?php
@@ -135,19 +138,19 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
-          <div class="small-box bg-teal">
+          <div class="small-box bg-purple">
             <div class="inner">
               <h3>
                 <?php
-                echo $conn->query("SELECT * FROM `return_list_requester` where id != 1 ")->num_rows;
+                echo $conn->query("SELECT * FROM `inventory_request_list` where id != 1 ")->num_rows;
                 ?>
               </h3>
-              <p>Return List - Requester</p>
+              <p>Inventory Request</p>
             </div>
             <div class="icon">
-              <i class="fas fa-rotate-right"></i>
+              <i class="fas fa-solid fa-envelope-open-text"></i>
             </div>
-            <a href="<?php echo base_url ?>admin/?page=return_list_requester" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url ?>admin/?page=inventory_request" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

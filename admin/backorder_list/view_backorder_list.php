@@ -26,7 +26,7 @@ if($qry->num_rows >0){
 }
 ?>
 <div class="col-12">
-<div class="card card-outline card-lightblue">
+<div class="card card-outline card-teal">
     <div class="card-header">
         <h4 class="card-title">Back Order Details - <?php echo $bo_code ?></h4>
     </div>
@@ -80,8 +80,8 @@ if($qry->num_rows >0){
                             <?php echo $row['name'] ?> <br>
                             <?php echo $row['description'] ?>
                         </td>
-                        <td class="py-1 px-2 text-right"><?php echo number_format($row['price']) ?></td>
-                        <td class="py-1 px-2 text-right"><?php echo number_format($row['total']) ?></td>
+                        <td class="py-1 px-2 text-right"><?php echo number_format($row['price'],2) ?></td>
+                        <td class="py-1 px-2 text-right"><?php echo number_format($row['total'],2) ?></td>
                     </tr>
 
                     <?php endwhile; ?>

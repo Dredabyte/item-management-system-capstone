@@ -1,20 +1,22 @@
 <!--Title Header-->
-<title>Item Management System - Inventory Request Lists</title>
+<title>Item Management System - Inventory Request List</title>
 </head>
 <!--Title Header ends-->
+
+<!-- Content Wrapper. Contains page content -->
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Inventory Request Lists</h1>
-        <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt animi alias illo impedit dolores natus hic ea ipsa expedita qui voluptatem dignissimos inventore, unde corrupti iste. Eveniet dolore perferendis eum.</p>
+        <h1 class="m-0">Inventory Request List</h1>
+        <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur commodi cupiditate totam obcaecati facere quas molestiae qui officia rem ex, maxime voluptate praesentium mollitia ducimus nisi beatae! Aliquam, nulla quo?</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
-          <li class="breadcrumb-item active">Inventory Request Lists</li>
+          <li class="breadcrumb-item active">Inventory Request List</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -29,11 +31,11 @@
       <div class="col-12">
         <div class="card card-outline card-purple">
           <div class="card-header">
-            <h3 class="card-title">Inventory Request</h3>
+            <h3 class="card-title">Inventory Request List</h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=inventory_request/manage_inventory_request" class="btn btn-block btn-outline-dark">
-                  Add Request
+                  Create Request
                   <i class="fas fa-plus"></i>
                 </a>
               </div>
@@ -46,45 +48,33 @@
                 <tr>
                   <th>ID</th>
                   <th>Date Created</th>
+                  <th>Inventory Request Code</th>
                   <th>Prepared By</th>
                   <th>Item/s</th>
-                  <th>Status</th>
+                  <th>Amount</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
                 $i = 1;
-                $qry = $conn->query("SELECT i.*, u.firstname as user FROM `inventory_request_list` i inner join users u on i.users_id = u.id order by i.`date_created` desc");
+                $qry = $conn->query("SELECT i.*, u.firstname as users FROM `inventory_request_list` i inner join users u on i.users_id = u.id order by i.`date_created` desc");
                 while ($row = $qry->fetch_assoc()) :
-                  $row['items'] = $conn->query("SELECT count(item_id) as `items` FROM `ir_items` where ir_id = '{$row['id']}' ")->fetch_assoc()['items'];
+                  $row['items'] = count(explode(',', $row['ir_stock_ids']));
                 ?>
                   <tr>
                     <td><?php echo $i++; ?></td>
                     <td><?php echo date('F j, Y | g:i A', strtotime($row['date_created'])) ?></td>
-                    <td><?php echo $row['user'] ?></td>
+                    <td><?php echo $row['ir_code'] ?></td>
+                    <td><?php echo $row['users'] ?></td>
                     <td><?php echo number_format($row['items']) ?></td>
-                    <td>
-                      <?php if ($row['status'] == 0) : ?>
-                        <span class="badge badge-primary rounded-pill">Pending</span>
-                      <?php elseif ($row['status'] == 1) : ?>
-                        <span class="badge badge-warning rounded-pill">Edited</span>
-                      <?php elseif ($row['status'] == 2) : ?>
-                        <span class="badge badge-success rounded-pill">Approved</span>
-                      <?php else : ?>
-                        <span class="badge badge-danger rounded-pill">N/A</span>
-                      <?php endif; ?>
-                    </td>
+                    <td><?php echo number_format($row['amount'], 2) ?></td>
                     <td>
                       <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
                         Action
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
-                        <?php if ($row['status'] == 0) : ?>
-                          <a class="dropdown-item" href="<?php echo base_url . 'admin?page=inventory_request/manage_inventory_request&po_id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-boxes text-dark"></span> Approved</a>
-                          <div class="dropdown-divider"></div>
-                        <?php endif; ?>
                         <a class="dropdown-item" href="<?php echo base_url . 'admin?page=inventory_request/view_inventory_request&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-eye text-dark"></span> View</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo base_url . 'admin?page=inventory_request/manage_inventory_request&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
@@ -108,7 +98,6 @@
   <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
-
 </div>
 <!-- /.content-wrapper -->
 
@@ -118,15 +107,28 @@
 </aside>
 <!-- /.control-sidebar -->
 
-
 <!-- Page specific script -->
 <script>
+  $(function() {
+    $("#example1").DataTable({
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", ]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
   $(document).ready(function() {
     $('.delete_data').click(function() {
       _conf("Are you sure to delete this Inventory Request permanently?", "delete_ir", [$(this).attr('data-id')])
-    })
-    $('.view_details').click(function() {
-      uni_modal("Payment Details", "transaction/view_payment.php?id=" + $(this).attr('data-id'), 'mid-large')
     })
     //$('.table td,.table th').addClass('py-1 px-2 align-middle')
     //$('.table').dataTable();
@@ -156,22 +158,4 @@
       }
     })
   }
-
-  $(function() {
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", ]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
 </script>

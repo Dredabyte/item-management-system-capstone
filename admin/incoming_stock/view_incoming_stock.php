@@ -94,14 +94,14 @@ if($qry->num_rows >0){
                         $total += $row['total']
                     ?>
                     <tr>
-                        <td class="py-1 px-2 text-center"><?php echo number_format($row['quantity'],2) ?></td>
+                        <td class="py-1 px-2 text-center"><?php echo number_format($row['quantity']) ?></td>
                         <td class="py-1 px-2 text-center"><?php echo ($row['unit']) ?></td>
                         <td class="py-1 px-2">
                             <?php echo $row['name'] ?> <br>
                             <?php echo $row['description'] ?>
                         </td>
-                        <td class="py-1 px-2 text-right"><?php echo number_format($row['price']) ?></td>
-                        <td class="py-1 px-2 text-right"><?php echo number_format($row['total']) ?></td>
+                        <td class="py-1 px-2 text-right"><?php echo number_format($row['price'],2) ?></td>
+                        <td class="py-1 px-2 text-right"><?php echo number_format($row['total'],2) ?></td>
                     </tr>
 
                     <?php endwhile; ?>

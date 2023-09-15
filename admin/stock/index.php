@@ -35,18 +35,21 @@
           <div class="inner">
             <h3>
               <?php
-              $totalQuantity = 0;
+              $totalIn = 0;
+              $totalOut = 0;
+              $resultIn = $conn->query("SELECT SUM(quantity) as total FROM stock_list WHERE type = 1");
 
-              $qry = $conn->query("SELECT * FROM `stock_list` where id != 1");
-              while ($row = $qry->fetch_assoc()) {
-                $totalQuantity += $row['quantity'];
+              if ($resultIn && $resultIn->num_rows > 0) {
+                $totalIn = $resultIn->fetch_assoc()['total'];
               }
+              $resultOut = $conn->query("SELECT SUM(quantity) as total FROM stock_list WHERE type = 2");
 
-              $formattedTotal = number_format($totalQuantity);
-
-              echo $formattedTotal;
+              if ($resultOut && $resultOut->num_rows > 0) {
+                $totalOut = $resultOut->fetch_assoc()['total'];
+              }
+              $remainingAvailable = $totalIn - $totalOut;
               ?>
-
+              <?php echo number_format($remainingAvailable) ?>
             </h3>
             <p>Total Stocks</p>
           </div>
