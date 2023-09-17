@@ -1,3 +1,22 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Create Outgoing Stocks - Record</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href=" <?php echo base_url.'admin/?page=outgoing_stock' ?>">Outgoing Stocks</a></li>
+          <li class="breadcrumb-item active">Create Outgoing Stocks - Record</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
 <?php
 if (isset($_GET['id'])) {
     $qry = $conn->query("SELECT * FROM outgoing_list where id = '{$_GET['id']}'");
@@ -21,7 +40,7 @@ if (isset($_GET['id'])) {
         box-shadow: none;
     }
 </style>
-<div class="card card-outline card-orange">
+<div class="card card-outline card-yellow">
     <div class="card-header">
         <h4 class="card-title"><?php echo isset($id) ? "Sale Details - " . $sales_code : 'Create New Sale Record' ?></h4>
     </div>

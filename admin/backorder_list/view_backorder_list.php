@@ -58,7 +58,7 @@ if($qry->num_rows >0){
                     <col width="25%">
                 </colgroup>
                 <thead>
-                    <tr class="text-light bg-lightblue">
+                    <tr class="text-light bg-navy">
                         <th class="text-center py-1 px-2">Quantity</th>
                         <th class="text-center py-1 px-2">Unit</th>
                         <th class="text-center py-1 px-2">Item/s</th>

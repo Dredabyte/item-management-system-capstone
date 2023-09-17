@@ -33,12 +33,12 @@
           <div class="card-header">
             <h3 class="card-title">Outgoing Stocks</h3>
             <div class="card-tools">
-              <div class="input-group-append">
+              <!-- <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="btn btn-block btn-outline-dark">
                   Add Orders
                   <i class="fas fa-plus"></i>
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- /.card-header -->
@@ -70,17 +70,14 @@
                     <td><?php echo number_format($row['items']) ?></td>
                     <td><?php echo number_format($row['amount'], 2) ?></td>
                     <td>
-                      <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                        Action
-                        <span class="sr-only">Toggle Dropdown</span>
-                      </button>
-                      <div class="dropdown-menu" role="menu">
+                    <a class="btn btn-flat btn-default btn-sm" href="<?php echo base_url . 'admin?page=outgoing_stock/view_outgoing_stock&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>">View</a>
+                      <!-- <div class="dropdown-menu" role="menu">
                         <a class="dropdown-item" href="<?php echo base_url . 'admin?page=outgoing_stock/view_outgoing_stock&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-eye text-dark"></span> View</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo base_url . 'admin?page=outgoing_stock/manage_outgoing_stock&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
-                      </div>
+                      </div> -->
                     </td>
                   </tr>
                 <?php endwhile; ?>

@@ -1,3 +1,22 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">View Outgoing Stocks - Record</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href=" <?php echo base_url.'admin/?page=outgoing_stock' ?>">Outgoing Stocks</a></li>
+          <li class="breadcrumb-item active">View Outgoing Stocks - Record</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
 <?php
 $qry = $conn->query("SELECT o.*, r.name as requester FROM outgoing_list o INNER JOIN requester_list r ON o.requester_id = r.id WHERE o.id = '{$_GET['id']}'");
 
@@ -9,7 +28,7 @@ if ($qry->num_rows > 0) {
     }
 }
 ?>
-<div class="card card-outline card-orange">
+<div class="card card-outline card-yellow">
     <div class="card-header">
         <h4 class="card-title">Sales Record - <?php echo $sales_code ?></h4>
     </div>
@@ -85,7 +104,7 @@ if ($qry->num_rows > 0) {
     </div>
     <div class="card-footer py-1 text-center">
         <button class="btn btn-success" type="button" id="print">Print</button>
-        <a class="btn btn-primary" href="<?php echo base_url.'/admin?page=outgoing_stock/manage_outgoing_stock&id='.(isset($id) ? $id : '') ?>">Edit</a>
+        <!-- <a class="btn btn-primary" href="<?php echo base_url.'/admin?page=outgoing_stock/manage_outgoing_stock&id='.(isset($id) ? $id : '') ?>">Edit</a> -->
         <a class="btn btn-dark" href="<?php echo base_url.'/admin?page=outgoing_stock' ?>">Back To List</a>
     </div>
 </div>

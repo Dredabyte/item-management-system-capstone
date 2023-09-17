@@ -1,5 +1,24 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">View Inventory Request</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?php echo base_url.'admin?page=inventory_request' ?>">Inventory Request List</a></li>
+          <li class="breadcrumb-item active">View Inventory Request</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
 <?php
-$qry = $conn->query("SELECT i.*, u.firstname as users FROM inventory_request_list i INNER JOIN users u ON i.users_id = u.id WHERE i.id = '{$_GET['id']}'");
+$qry = $conn->query("SELECT i.*, u.firstname, u.lastname, u.role FROM inventory_request_list i INNER JOIN users u ON i.users_id = u.id WHERE i.id = '{$_GET['id']}'");
 
 if ($qry->num_rows > 0) {
     $row = $qry->fetch_assoc();
@@ -23,7 +42,7 @@ if ($qry->num_rows > 0) {
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="client" class="control-label text-info">Prepared By</label>
-                        <div><?php echo isset($users) ? $users : '' ?></div>
+                        <div><?php echo isset($firstname) ? $firstname . ' ' . $lastname . ' (' . $role . ')' : '' ?></div>
                     </div>
                 </div>
             </div>
