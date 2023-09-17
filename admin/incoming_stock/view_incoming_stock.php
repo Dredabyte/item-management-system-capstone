@@ -100,8 +100,8 @@ if($qry->num_rows >0){
                             <?php echo $row['name'] ?> <br>
                             <?php echo $row['description'] ?>
                         </td>
-                        <td class="py-1 px-2 text-right"><?php echo number_format($row['price'],2) ?></td>
-                        <td class="py-1 px-2 text-right"><?php echo number_format($row['total'],2) ?></td>
+                        <td class="py-1 px-2 text-right">₱ <?php echo number_format($row['price'],2) ?></td>
+                        <td class="py-1 px-2 text-right">₱ <?php echo number_format($row['total'],2) ?></td>
                     </tr>
 
                     <?php endwhile; ?>
@@ -110,7 +110,7 @@ if($qry->num_rows >0){
                 <tfoot>
                     <tr>
                         <th class="text-right py-1 px-2" colspan="4">Sub Total</th>
-                        <th class="text-right py-1 px-2 sub-total"><?php echo number_format($total,2)  ?></th>
+                        <th class="text-right py-1 px-2 sub-total">₱ <?php echo number_format($total,2)  ?></th>
                     </tr>
                     <tr>
                         <th class="text-right py-1 px-2" colspan="4">Discount <?php echo isset($discount_perc) ? $discount_perc : 0 ?>%</th>
@@ -122,7 +122,7 @@ if($qry->num_rows >0){
                     </tr>
                     <tr>
                         <th class="text-right py-1 px-2" colspan="4">Total</th>
-                        <th class="text-right py-1 px-2 grand-total"><?php echo isset($amount) ? number_format($amount,2) : 0 ?></th>
+                        <th class="text-right py-1 px-2 grand-total">₱ <?php echo isset($amount) ? number_format($amount,2) : 0 ?></th>
                     </tr>
                 </tfoot>
             </table>
