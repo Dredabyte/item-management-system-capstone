@@ -1,19 +1,19 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1 class="m-0">Create Outgoing Stocks - Record</h1>
-      </div><!-- /.col -->
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href=" <?php echo base_url.'admin/?page=outgoing_stock' ?>">Outgoing Stocks</a></li>
-          <li class="breadcrumb-item active">Create Outgoing Stocks - Record</li>
-        </ol>
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Create Outgoing Stocks - Record</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href=" <?php echo base_url . 'admin/?page=outgoing_stock' ?>">Outgoing Stocks</a></li>
+                    <li class="breadcrumb-item active">Create Outgoing Stocks - Record</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 
@@ -57,13 +57,13 @@ if (isset($_GET['id'])) {
                         <div class="form-group">
                             <label for="requester_id" class="control-label text-info">Client Name</label>
                             <select name="requester_id" id="requester_id" class="custom-select select2">
-                            <option <?php echo !isset($requester_id) ? 'selected' : '' ?> disabled></option>
-                            <?php 
-                            $requester = $conn->query("SELECT * FROM `requester_list` where status = 1 order by `name` asc");
-                            while($row=$requester->fetch_assoc()):
-                            ?>
-                            <option value="<?php echo $row['id'] ?>" <?php echo isset($requester_id) && $requester_id == $row['id'] ? "selected" : "" ?> ><?php echo $row['name'] ?></option>
-                            <?php endwhile; ?>
+                                <option <?php echo !isset($requester_id) ? 'selected' : '' ?> disabled></option>
+                                <?php
+                                $requester = $conn->query("SELECT * FROM `requester_list` where status = 1 order by `name` asc");
+                                while ($row = $requester->fetch_assoc()) :
+                                ?>
+                                    <option value="<?php echo $row['id'] ?>" <?php echo isset($requester_id) && $requester_id == $row['id'] ? "selected" : "" ?>><?php echo $row['name'] ?></option>
+                                <?php endwhile; ?>
                             </select>
                         </div>
                     </div>
@@ -72,23 +72,45 @@ if (isset($_GET['id'])) {
                 <fieldset>
                     <legend class="text-info">Item Form</legend>
                     <div class="row justify-content-center align-items-end">
-                        <?php
+                        <?php             
+                        $lowStockThreshold = 200;
                         $item_arr = array();
                         $cost_arr = array();
-                        $item = $conn->query("SELECT * FROM `item_list` where status = 1 order by `name` asc");
-                        while ($row = $item->fetch_assoc()) :
-                            $item_arr[$row['id']] = $row;
-                            $cost_arr[$row['id']] = $row['cost'];
-                        endwhile;
+                        $itemQuery = $conn->query("SELECT * FROM `item_list` WHERE status = 1 ORDER BY `name` ASC");
+
+                        if ($itemQuery) {
+                            while ($row = $itemQuery->fetch_assoc()) {
+                                $item_id = $row['id'];
+
+                                $stockQuery = $conn->query("SELECT SUM(CASE WHEN type = 1 THEN quantity ELSE -quantity END) AS available_stock FROM stock_list WHERE item_id = $item_id");
+
+                                if ($stockQuery) {
+                                    $stockRow = $stockQuery->fetch_assoc();
+                                    $availableStock = $stockRow['available_stock'];
+
+                                    if ($availableStock >= $lowStockThreshold) {
+                                        $item_arr[$row['id']] = $row;
+                                        $cost_arr[$row['id']] = $row['cost'];
+                                    }
+                                } else {
+                                    echo "Error executing stock query: " . $conn->error;
+                                }
+                            }
+                        } else {
+                            echo "Error executing item query: " . $conn->error;
+                        }
                         ?>
+                        
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="item_id" class="control-label">Item</label>
                                 <select id="item_id" class="custom-select select2">
                                     <option disabled selected></option>
-                                    <?php foreach ($item_arr as $k => $v) : ?>
-                                        <option value="<?php echo $k ?>"> <?php echo $v['name'] ?></option>
-                                    <?php endforeach; ?>
+                                    <?php
+                                    foreach ($item_arr as $k => $v) {
+                                        echo "<option value=\"$k\">{$v['name']}</option>";
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
