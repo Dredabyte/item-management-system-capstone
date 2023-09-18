@@ -1,5 +1,5 @@
 function start_loader(){
-	$('body').append('<div id="preloader"><div class="loader-holder"><div></div><div></div><div></div><div></div>')
+	$('body').append('<div id="preloader"><div class="spinner"><div></div><div></div><div></div><div></div>')
 }
 function end_loader(){
 	 $('#preloader').fadeOut('fast', function() {
