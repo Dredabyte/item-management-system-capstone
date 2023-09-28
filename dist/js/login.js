@@ -1,11 +1,13 @@
 function start_loader() {
-    $('body').append('<div id="preloader"><div class="loader-holder"><div></div><div></div><div></div><div></div>')
+    $('body').append('<div id="preloader"><div class="spinner"><div></div><div></div><div></div><div></div>')
 }
+
 function end_loader() {
     $('#preloader').fadeOut('fast', function () {
         $('#preloader').remove();
     })
 }
+
 // function 
 window.alert_toast = function ($msg = 'TEST', $bg = 'success', $pos = '') {
     var Toast = Swal.mixin({
@@ -20,9 +22,10 @@ window.alert_toast = function ($msg = 'TEST', $bg = 'success', $pos = '') {
     })
 }
 
-$(document).ready(function () {
+$(function () { // Equivalent to $(document).ready(function(){
+
     // Login
-    $('#login-frm').submit(function (e) {
+    $('#login-frm').on('submit', function (e) {
         e.preventDefault()
         start_loader()
         if ($('.err_msg').length > 0)
@@ -33,7 +36,6 @@ $(document).ready(function () {
             data: $(this).serialize(),
             error: err => {
                 console.log(err)
-
             },
             success: function (resp) {
                 if (resp) {
@@ -42,7 +44,7 @@ $(document).ready(function () {
                         location.replace(_base_url_ + 'admin');
                     } else if (resp.status == 'incorrect') {
                         var _frm = $('#login-frm')
-                        var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect Username or Password</div>"
+                        var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect Email or Password</div>"
                         _frm.prepend(_msg)
                         _frm.find('input').addClass('is-invalid')
                         $('[name="email"]').focus()
@@ -51,9 +53,10 @@ $(document).ready(function () {
                 }
             }
         })
-    })
+    });
+
     //Establishment Login
-    $('#flogin-frm').submit(function (e) {
+    $('#flogin-frm').on('submit', function (e) {
         e.preventDefault()
         start_loader()
         if ($('.err_msg').length > 0)
@@ -64,7 +67,6 @@ $(document).ready(function () {
             data: $(this).serialize(),
             error: err => {
                 console.log(err)
-
             },
             success: function (resp) {
                 if (resp) {
@@ -73,7 +75,7 @@ $(document).ready(function () {
                         location.replace(_base_url_ + 'faculty');
                     } else if (resp.status == 'incorrect') {
                         var _frm = $('#flogin-frm')
-                        var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect Username or Password</div>"
+                        var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect Email or Password</div>"
                         _frm.prepend(_msg)
                         _frm.find('input').addClass('is-invalid')
                         $('[name="email"]').focus()
@@ -82,10 +84,10 @@ $(document).ready(function () {
                 }
             }
         })
-    })
+    });
 
     //user login
-    $('#slogin-frm').submit(function (e) {
+    $('#slogin-frm').on('submit', function (e) {
         e.preventDefault()
         start_loader()
         if ($('.err_msg').length > 0)
@@ -96,7 +98,6 @@ $(document).ready(function () {
             data: $(this).serialize(),
             error: err => {
                 console.log(err)
-
             },
             success: function (resp) {
                 if (resp) {
@@ -105,7 +106,7 @@ $(document).ready(function () {
                         location.replace(_base_url_ + 'student');
                     } else if (resp.status == 'incorrect') {
                         var _frm = $('#slogin-frm')
-                        var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect Username or Password</div>"
+                        var _msg = "<div class='alert alert-danger text-white err_msg'><i class='fa fa-exclamation-triangle'></i> Incorrect Email or Password</div>"
                         _frm.prepend(_msg)
                         _frm.find('input').addClass('is-invalid')
                         $('[name="email"]').focus()
@@ -114,9 +115,10 @@ $(document).ready(function () {
                 }
             }
         })
-    })
+    });
+
     // System Info
-    $('#system-frm').submit(function (e) {
+    $('#system-frm').on('submit', function (e) {
         e.preventDefault()
         start_loader()
         if ($('.err_msg').length > 0)
@@ -131,13 +133,13 @@ $(document).ready(function () {
             type: 'POST',
             success: function (resp) {
                 if (resp == 1) {
-                    // alert_toast("Data successfully saved",'success')
+                    alert_toast("Data successfully saved", 'success')
                     location.reload()
                 } else {
                     $('#msg').html('<div class="alert alert-danger err_msg">An Error occured</div>')
-                    end_load()
+                    end_loader()
                 }
             }
         })
-    })
-})
+    });
+});

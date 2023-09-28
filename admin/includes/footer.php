@@ -118,8 +118,8 @@
 <!-- overlayScrollbars -->
 <script src="<?php echo base_url ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<!-- script src="<?php echo base_url ?>dist/js/adminlte.js"></script> -->
-<!-- script src="<?php echo base_url ?>dist/js/adminlte.js.map"></script> -->
+<script src="<?php echo base_url ?>dist/js/adminlte.js"></script>
+<script src="<?php echo base_url ?>dist/js/adminlte.js.map"></script>
 <script src="<?php echo base_url ?>dist/js/adminlte.min.js"></script>
 <script src="<?php echo base_url ?>dist/js/adminlte.min.js.map"></script>
 <!-- fullCalendar 2.2.5 -->
