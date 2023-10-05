@@ -33,7 +33,7 @@
         <div class="small-box bg-primary">
           <div class="inner">
             <h3>
-            <?php
+              <?php
               $totalIn = 0;
               $totalOut = 0;
               $resultIn = $conn->query("SELECT SUM(quantity) as total FROM stock_list WHERE type = 1");
@@ -101,7 +101,30 @@
           <div class="inner">
             <h3>
               <?php
-              echo $conn->query("SELECT * FROM `low_stock` where id != 1 ")->num_rows;
+              $lowStockThreshold = 200;
+              $query = "SELECT i.*, s.name AS supplier,
+            (COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 1), 0) 
+            - COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 2), 0)) AS available_stock
+            FROM item_list i
+            INNER JOIN supplier_list s ON i.supplier_id = s.id
+            ORDER BY i.name DESC";
+
+              $result = $conn->query($query);
+
+              if ($result) {
+                $lowStockItemCount = 0;
+                if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                    $item_id = $row['id'];
+                    $available_stock = $row['available_stock'];
+
+                    if ($available_stock < $lowStockThreshold) {
+                      $lowStockItemCount++;
+                    }
+                  }
+                  echo $lowStockItemCount;
+                }
+              }
               ?>
             </h3>
             <p>Low Stocks</p>

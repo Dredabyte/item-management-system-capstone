@@ -7,8 +7,8 @@ require_once('sess_auth.php');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--Title Header-->
   <title><?php echo $_settings->info('title') != false ? $_settings->info('title') . ' | ' : '' ?><?php echo $_settings->info('name') ?></title>
-  <!-- Google Font: Source Sans Pro 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">-->
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Select2 -->
@@ -30,11 +30,11 @@ require_once('sess_auth.php');
   <link rel="stylesheet" href="<?php echo base_url ?>plugins/fontawesome-free-6.4.0-web/css/all.min.css">
   <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" / -->
   <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url ?>dist/css/preload.css">
   <link rel="stylesheet" href="<?php echo base_url ?>dist/css/adminlte.css">
   <link rel="stylesheet" href="<?php echo base_url ?>dist/css/adminlte.css.map">
-  <link rel="stylesheet" href="<?php echo base_url ?>dist/css/adminlte.min.css">
   <link rel="stylesheet" href="<?php echo base_url ?>dist/css/adminlte.min.css.map">
-  <link rel="stylesheet" href="<?php echo base_url ?>dist/css/preload.css">
+  <link rel="stylesheet" href="<?php echo base_url ?>dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -106,7 +106,7 @@ require_once('sess_auth.php');
   <!-- Toastr -->
   <script src="<?php echo base_url ?>plugins/toastr/toastr.min.js"></script>
   <script>
-    var _base_url_ = '<?php echo base_url ?>';
+    var _base_url_ = "<?php echo base_url ?>";
   </script>
   <script src="<?php echo base_url ?>dist/js/login.js"></script>
 </head>
