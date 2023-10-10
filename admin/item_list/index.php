@@ -71,8 +71,8 @@
             </div>
           </div>
           <!-- /.card-header -->
-          <div class="card-body">
-            <table id="example1" class="table table-hover table-nowrap">
+          <div class="card-body table-responsive p-0">
+            <table id="" class="table table-hover text-nowrap">
               <thead>
                 <tr>
                   <th>ID</th>

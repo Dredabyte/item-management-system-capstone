@@ -105,28 +105,27 @@
                 <?php
                 $lowStockThreshold = 200;
                 $query = "SELECT i.*, s.name AS supplier,
-              (COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 1), 0) 
-               - COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 2), 0)) AS available_stock
-              FROM item_list i
-              INNER JOIN supplier_list s ON i.supplier_id = s.id
-              ORDER BY i.name DESC";
-
+                (COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 1), 0) 
+                - COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 2), 0)) AS available_stock
+                FROM item_list i
+                INNER JOIN supplier_list s ON i.supplier_id = s.id
+                ORDER BY i.name DESC";
                 $result = $conn->query($query);
-
                 if ($result) {
                   if ($result->num_rows > 0) {
+                    $i = 1;
                     while ($row = $result->fetch_assoc()) {
-                      $item_id = $row['id'];
                       $available_stock = $row['available_stock'];
 
                       if ($available_stock < $lowStockThreshold) {
                         echo "<tr>";
-                        echo "<td>$item_id</td>";
+                        echo "<td>$i</td>";
                         echo "<td>{$row['name']}</td>";
                         echo "<td>{$row['supplier']}</td>";
                         echo "<td>{$row['description']}</td>";
                         echo "<td>$available_stock</td>";
                         echo "</tr>";
+                        $i++;
                       }
                     }
                   } else {

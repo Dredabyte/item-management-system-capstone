@@ -989,7 +989,7 @@ function delete_requester(){
 		return json_encode($resp);
 
 	}
-
+	
 }
 
 
