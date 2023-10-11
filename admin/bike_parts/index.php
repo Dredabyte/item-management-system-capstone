@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Drivetrain Parts
@@ -45,7 +45,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Shifters
@@ -60,7 +60,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Brakes
@@ -75,7 +75,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Tubes and Tires
@@ -96,7 +96,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Wheels, Rims, Spokes
@@ -111,7 +111,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Handlebars, Aerobars, Bar Ends
@@ -126,7 +126,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Stems
@@ -141,7 +141,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Seatposts
@@ -162,7 +162,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Saddles
@@ -177,7 +177,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Pedals
@@ -192,7 +192,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Frames & Frameparts
@@ -207,7 +207,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Build Kits & Groups
@@ -228,7 +228,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Forks
@@ -243,7 +243,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Rear Shocks
@@ -258,7 +258,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow shadow">
                     <div class="inner">
                         <h6>
                             Headsets
@@ -273,7 +273,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Cables, Housing, and Parts
@@ -294,7 +294,7 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Hubs
@@ -309,7 +309,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Quick Releases & Thru-axles
@@ -324,7 +324,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-dark">
+                <div class="small-box bg-dark shadow">
                     <div class="inner">
                         <h6>
                             Bearings

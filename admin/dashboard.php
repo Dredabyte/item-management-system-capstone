@@ -215,12 +215,11 @@
         <!-- ./col -->
       </div>
     <?php endif; ?>
-
     <!-- /.row -->
     <!-- Main row -->
     <div class="row">
       <!-- Left col -->
-      <section class="col-lg-7 connectedSortable">
+      <section class="col-lg-6 connectedSortable">
         <!-- TABLE: LATEST SALE -->
         <div class="card card-info shadow">
           <div class="card-header border-transparent">
@@ -239,55 +238,34 @@
                 <thead>
                   <tr>
                     <th>Sales ID</th>
-                    <th>Item</th>
+                    <th>Requester</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td><span class="badge badge-success">Shipped</span></td>
-                  </tr>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR1848</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="badge badge-warning">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR7429</a></td>
-                    <td>iPhone 6 Plus</td>
-                    <td><span class="badge badge-danger">Delivered</span></td>
-                  </tr>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR7429</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="badge badge-info">Processing</span></td>
-                  </tr>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR1848</a></td>
-                    <td>Samsung Smart TV</td>
-                    <td><span class="badge badge-warning">Pending</span></td>
-                  </tr>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR7429</a></td>
-                    <td>iPhone 6 Plus</td>
-                    <td><span class="badge badge-danger">Delivered</span></td>
-                  </tr>
-                  <tr>
-                    <td><a href="../pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td><span class="badge badge-success">Shipped</span></td>
-                  </tr>
+                  <?php
+                  $qry = $conn->query("SELECT o.sales_code, r.name AS requester_name
+                  FROM outgoing_list o
+                  INNER JOIN requester_list r ON o.requester_id = r.id");
+
+                  while ($row = $qry->fetch_assoc()) :
+                  ?>
+                    <tr>
+                      <td><?php echo $row['sales_code']; ?></td>
+                      <td><?php echo $row['requester_name']; ?></td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                    </tr>
+                  <?php endwhile; ?>
                 </tbody>
               </table>
+
             </div>
             <!-- /.table-responsive -->
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
-            <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+            <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="btn btn-sm btn-info float-left">Place New Order</a>
+            <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="btn btn-sm btn-secondary float-right">View All Sales</a>
           </div>
           <!-- /.card-footer -->
         </div>
@@ -295,11 +273,11 @@
       </section>
       <!-- /.Left col -->
       <!-- right col (We are only adding the ID to make the widgets sortable)-->
-      <section class="col-lg-5 connectedSortable">
-        <!-- PRODUCT LIST -->
+      <section class="col-lg-6 connectedSortable">
+        <!-- TABLE: LATEST SALE -->
         <div class="card card-success shadow">
-          <div class="card-header">
-            <h3 class="card-title">Recently Added Items</h3>
+          <div class="card-header border-transparent">
+            <h3 class="card-title">Latest Ordered Items</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -309,67 +287,57 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body p-0">
-            <ul class="products-list product-list-in-card pl-2 pr-2">
-              <li class="item">
-                <div class="product-img">
-                  <img src="../dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                </div>
-                <div class="product-info">
-                  <a href="javascript:void(0)" class="product-title">Samsung TV
-                    <span class="badge badge-warning float-right">$1800</span></a>
-                  <span class="product-description">
-                    Samsung 32" 1080p 60Hz LED Smart HDTV.
-                  </span>
-                </div>
-              </li>
-              <!-- /.item -->
-              <li class="item">
-                <div class="product-img">
-                  <img src="../dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                </div>
-                <div class="product-info">
-                  <a href="javascript:void(0)" class="product-title">Bicycle
-                    <span class="badge badge-info float-right">$700</span></a>
-                  <span class="product-description">
-                    26" Mongoose Dolomite Men's 7-speed, Navy Blue.
-                  </span>
-                </div>
-              </li>
-              <!-- /.item -->
-              <li class="item">
-                <div class="product-img">
-                  <img src="../dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                </div>
-                <div class="product-info">
-                  <a href="javascript:void(0)" class="product-title">
-                    Xbox One <span class="badge badge-danger float-right">
-                      $350
-                    </span>
-                  </a>
-                  <span class="product-description">
-                    Xbox One Console Bundle with Halo Master Chief Collection.
-                  </span>
-                </div>
-              </li>
-              <!-- /.item -->
-              <li class="item">
-                <div class="product-img">
-                  <img src="../dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                </div>
-                <div class="product-info">
-                  <a href="javascript:void(0)" class="product-title">PlayStation 4
-                    <span class="badge badge-success float-right">$399</span></a>
-                  <span class="product-description">
-                    PlayStation 4 500GB Console (PS4)
-                  </span>
-                </div>
-              </li>
-              <!-- /.item -->
-            </ul>
+            <div class="table-responsive">
+              <table class="table m-0">
+                <thead>
+                  <tr>
+                    <th>Purchase Order ID</th>
+                    <th>Supplier</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $qry = $conn->query("SELECT o.po_code, s.name AS supplier_name, o.status
+                      FROM purchase_order_list o
+                      INNER JOIN supplier_list s ON o.supplier_id = s.id");
+
+                  while ($row = $qry->fetch_assoc()) :
+                  ?>
+                    <tr>
+                      <td><?php echo $row['po_code']; ?></td>
+                      <td><?php echo $row['supplier_name']; ?></td>
+                      <td>
+                        <?php
+                        $status = $row['status'];
+                        $statusText = '';
+                        $badgeClass = '';
+
+                        if ($status == 1) {
+                          $statusText = 'Partially Received';
+                          $badgeClass = 'badge badge-warning';
+                        } elseif ($status == 2) {
+                          $statusText = 'Received';
+                          $badgeClass = 'badge badge-success';
+                        } elseif ($status == 0) {
+                          $statusText = 'Pending';
+                          $badgeClass = 'badge badge-info';
+                        }
+
+                        echo '<span class="' . $badgeClass . '">' . $statusText . '</span>';
+                        ?>
+                      </td>
+                    </tr>
+                  <?php endwhile; ?>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.table-responsive -->
           </div>
           <!-- /.card-body -->
-          <div class="card-footer text-center">
-            <a href="javascript:void(0)" class="uppercase">View All Products</a>
+          <div class="card-footer clearfix">
+            <a href="<?php echo base_url ?>admin/?page=purchase_order_list/manage_purchase_order_list" class="btn btn-sm btn-info float-left">Place New Order</a>
+            <a href="<?php echo base_url ?>admin/?page=purchase_order_list" class="btn btn-sm btn-secondary float-right">View All Sales</a>
           </div>
           <!-- /.card-footer -->
         </div>

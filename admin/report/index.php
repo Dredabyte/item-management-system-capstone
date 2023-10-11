@@ -124,14 +124,14 @@
                       exit;
                     }
 
-                    $sql = "SELECT * FROM $tableName WHERE date_created >= '$start_date' AND date_created <= '$end_date'";
+                    $sql = "SELECT * FROM $tableName WHERE DATE(date_created) BETWEEN '$start_date' AND '$end_date' ORDER BY DATE(date_created) ASC";
                     $query = $conn->query($sql);
 
                     $totalAmount = 0; // Initialize the total amount variable
 
                     while ($row = $query->fetch_assoc()) {
                       echo '<tr>';
-                      echo '<td class="py-1 px-2 text-center">' . date('F j, Y g:i A', strtotime($row['date_created'])) . '</td>';
+                      echo '<td class="py-1 px-2 text-center">' . date ('F j, Y g:i A', strtotime($row['date_created'])) . '</td>';
                       echo '<td class="py-1 px-2 text-center">' . $row['stock_ids'] . '</td>';
                       echo '<td class="py-1 px-2 text-center">₱ ' . number_format($row['amount'], 2) . '</td>';
                       echo '</tr>';
