@@ -323,7 +323,7 @@
         series: [{
           name: 'Quantity',
           colorByPoint: true,
-          data: <?php echo json_encode($data); ?> 
+          data: <?php echo json_encode($data); ?>
         }]
       });
     </script>
