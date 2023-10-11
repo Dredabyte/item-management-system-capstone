@@ -39,7 +39,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/DRIVETRAIN_PARTS.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/drivetrain" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

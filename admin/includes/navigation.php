@@ -172,14 +172,14 @@
               <i class="right fas fa-angle-left"></i>
             </a>
             <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
                   <i class="nav-icon fas fa-solid fa-bicycle"></i>
                   <p>
                     Bike Parts
                   </p>
                 </a>
-              </li>
+              </li> -->
 
               <li class="nav-item">
                 <a href="<?php echo base_url ?>admin/?page=item_list" class="nav-link nav-item_list">
