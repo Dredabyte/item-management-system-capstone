@@ -217,123 +217,239 @@
     <?php endif; ?>
     <!-- /.row -->
 
+    <!-- Main row -->
+    <div class="row">
+      <!-- Left col -->
+      <section class="col-lg-6">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <style>
+          .highcharts-figure,
+          .highcharts-data-table table {
+            min-width: 320px;
+            max-width: 660px;
+            margin: 1em auto;
+            border: 3px solid;
+            border-radius: 3px;
+          }
 
-    <style>
-      .highcharts-figure,
-      .highcharts-data-table table {
-        min-width: 320px;
-        max-width: 660px;
-        margin: 1em auto;
-      }
+          .highcharts-data-table table {
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+          }
 
-      .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: collapse;
-        border: 1px solid #ebebeb;
-        margin: 10px auto;
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-      }
+          .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+          }
 
-      .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-      }
+          .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+          }
 
-      .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-      }
+          .highcharts-data-table td,
+          .highcharts-data-table th,
+          .highcharts-data-table caption {
+            padding: 0.5em;
+          }
 
-      .highcharts-data-table td,
-      .highcharts-data-table th,
-      .highcharts-data-table caption {
-        padding: 0.5em;
-      }
+          .highcharts-data-table thead tr,
+          .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+          }
 
-      .highcharts-data-table thead tr,
-      .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-      }
+          .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+          }
+        </style>
 
-      .highcharts-data-table tr:hover {
-        background: #f1f7ff;
-      }
-    </style>
+        <figure class="highcharts-figure">
+          <div id="container"></div>
+        </figure>
 
-    <figure class="highcharts-figure">
-      <div id="container"></div>
-    </figure>
+        <?php
+        require_once '../config.php';
 
-    <?php
-    require_once '../config.php';
-    $sql = "SELECT sl.item_id, sl.quantity, il.name 
+        $sql = "SELECT sl.item_id, sl.quantity, il.name 
         FROM stock_list sl 
         INNER JOIN item_list il ON sl.item_id = il.id";
-    $getData = $conn->query($sql);
-    $data = array();
 
-    if ($getData->num_rows > 0) {
-      while ($row = $getData->fetch_assoc()) {
-        $data[] = array(
-          'name' => $row['name'],
-          'y' => (int)$row['quantity']
-        );
-      }
-    }
-    ?>
+        $getData = $conn->query($sql);
 
-    <script>
-      Highcharts.chart('container', {
-        chart: {
-          plotBackgroundColor: null,
-          plotBorderWidth: null,
-          plotShadow: false,
-          type: 'pie'
-        },
-        title: {
-          text: 'Total Items',
-          align: 'left'
-        },
-        tooltip: {
-          pointFormat: '{series.name}: <b>{point.y}</b>'
-        },
-        accessibility: {
-          point: {
-            valueSuffix: '%'
+        $itemNames = array();
+        $quantities = array();
+
+        if ($getData->num_rows > 0) {
+          while ($row = $getData->fetch_assoc()) {
+            $itemNames[] = $row['name'];
+            $quantities[] = (int)$row['quantity'];
           }
-        },
-        plotOptions: {
-          pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-              enabled: false
+        }
+        ?>
+
+        <script>
+          Highcharts.chart('container', {
+            chart: {
+              type: 'bar'
             },
-            showInLegend: true
+            title: {
+              text: 'Quantity of Items by Item Name'
+            },
+            xAxis: {
+              categories: <?php echo json_encode($itemNames); ?>,
+              title: {
+                text: 'Item Name'
+              }
+            },
+            yAxis: {
+              title: {
+                text: 'Quantity'
+              }
+            },
+            series: [{
+              name: 'Quantity',
+              data: <?php echo json_encode($quantities); ?>
+            }]
+          });
+        </script>
+      </section>
+
+      <!-- Right col -->
+      <section class="col-lg-6">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+        <style>
+          .highcharts-figure,
+          .highcharts-data-table table {
+            min-width: 320px;
+            max-width: 660px;
+            margin: 1em auto;
+            border: 3px solid;
+            border-radius: 3px;
           }
-        },
-        series: [{
-          name: 'Quantity',
-          colorByPoint: true,
-          data: <?php echo json_encode($data); ?>
-        }]
-      });
-    </script>
+
+          .highcharts-data-table table {
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+          }
+
+          .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+          }
+
+          .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+          }
+
+          .highcharts-data-table td,
+          .highcharts-data-table th,
+          .highcharts-data-table caption {
+            padding: 0.5em;
+          }
+
+          .highcharts-data-table thead tr,
+          .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+          }
+
+          .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+          }
+        </style>
+
+        <figure class="highcharts-figure">
+          <div id="container2"></div>
+        </figure>
+
+        <?php
+        require_once '../config.php';
+
+        $sql = "SELECT sl.item_id, il.name, sl.quantity 
+        FROM stock_list sl
+        INNER JOIN item_list il ON sl.item_id = il.id
+        WHERE sl.quantity < 200";
+        $getData = $conn->query($sql);
+
+        $data = array();
+
+        if ($getData->num_rows > 0) {
+          while ($row = $getData->fetch_assoc()) {
+            $data[] = array(
+              'name' => $row['name'],
+              'y' => (int)$row['quantity']
+            );
+          }
+        }
+        ?>
+
+
+
+        <script>
+          Highcharts.chart('container2', {
+            chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+            },
+            title: {
+              text: 'Low Stock Items',
+              align: 'left'
+            },
+            tooltip: {
+              pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            accessibility: {
+              point: {
+                valueSuffix: '%'
+              }
+            },
+            plotOptions: {
+              pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                  enabled: false
+                },
+                showInLegend: true
+              }
+            },
+            series: [{
+              name: 'Quantity',
+              colorByPoint: true,
+              data: <?php echo json_encode($data); ?>
+            }]
+          });
+        </script>
+
+      </section>
+    </div>
 
     <!-- Main row -->
     <div class="row">
       <!-- Left col -->
       <section class="col-lg-6 connectedSortable">
         <!-- TABLE: LATEST SALE -->
-        <div class="card card-info shadow">
+        <div class="card card-outline card-info shadow">
           <div class="card-header border-transparent">
             <h3 class="card-title">Latest Sale Items</h3>
 
@@ -387,7 +503,7 @@
       <!-- right col (We are only adding the ID to make the widgets sortable)-->
       <section class="col-lg-6 connectedSortable">
         <!-- TABLE: LATEST SALE -->
-        <div class="card card-success shadow">
+        <div class="card card-outline card-success shadow">
           <div class="card-header border-transparent">
             <h3 class="card-title">Latest Ordered Items</h3>
 
