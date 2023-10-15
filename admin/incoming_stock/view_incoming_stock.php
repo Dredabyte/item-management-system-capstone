@@ -188,6 +188,7 @@ if($qry->num_rows >0){
                       '<div class="col-10">'+
                       '<h4 class="text-center"><?php echo $_settings->info('name') ?></h4>'+
                       '<h4 class="text-center">Received Incoming Order</h4>'+
+                      '<h5 class="text-left">Printed by: <?php echo ucwords($_settings->userdata('firstname'). ' '.$_settings->userdata('lastname'). ' - '.$_settings->userdata('role')) ?></h5>'+
                       '</div>'+
                       '<div class="col-1 text-right">'+
                       '</div>'+

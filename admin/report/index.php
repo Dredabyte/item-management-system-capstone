@@ -45,7 +45,7 @@
                   <option value="outgoing">Outgoing Stock</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Date Start:</label>
                 <div class="input-group date" id="start_reservationdate" data-target-input="nearest">
                   <input type="text" class="form-control datetimepicker-input" name="startDate" data-target="#start_reservationdate" placeholder="mm/dd/yyyy">
@@ -54,7 +54,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group col-sm-6">
                 <label>Date End:</label>
                 <div class="input-group date" id="end_reservationdate" data-target-input="nearest">
                   <input type="text" class="form-control datetimepicker-input" name="endDate" data-target="#end_reservationdate" placeholder="mm/dd/yyyy">
@@ -202,6 +202,7 @@
         '<div class="col-10">' +
         '<h4 class="text-center"><?php echo $_settings->info('name') ?></h4>' +
         '<h4 class="text-center">Report</h4>' +
+        '<h5 class="text-left">Printed by: <?php echo ucwords($_settings->userdata('firstname'). ' '.$_settings->userdata('lastname'). ' - '.$_settings->userdata('role')) ?></h5>' +
         '</div>' +
         '<div class="col-1 text-right">' +
         '</div>' +

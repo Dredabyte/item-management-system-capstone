@@ -185,6 +185,7 @@ if (isset($_GET['id'])) {
                             <label for="remarks" class="text-info control-label">Remarks</label>
                             <textarea name="remarks" id="remarks" rows="3" class="form-control rounded-0"><?php echo isset($remarks) ? $remarks : '' ?></textarea>
                         </div>
+                        <p class="bg-warning">Note: If it's been approved, please include the name of the person who gave their approval for this request.</p>
                     </div>
                 </div>
             </div>

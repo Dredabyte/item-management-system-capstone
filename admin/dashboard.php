@@ -55,7 +55,9 @@
           <div class="icon">
             <i class="fas fa-light fa-box"></i>
           </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
           <a href="<?php echo base_url ?>admin/?page=stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
         </div>
       </div>
       <!-- ./col -->
@@ -73,7 +75,9 @@
           <div class="icon">
             <i class="fas fa-right-to-bracket"></i>
           </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
           <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
         </div>
       </div>
       <!-- ./col -->
@@ -91,7 +95,9 @@
           <div class="icon">
             <i class="fas fa-right-from-bracket"></i>
           </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
           <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
         </div>
       </div>
       <!-- ./col -->
@@ -132,14 +138,15 @@
           <div class="icon">
             <i class="fas fa-exclamation-triangle"></i>
           </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
           <a href="<?php echo base_url ?>admin/?page=low_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
         </div>
       </div>
       <!-- ./col -->
     </div>
     <!-- /.row -->
 
-    <?php if ($_settings->userdata('type') == 1) : ?>
       <div class="row">
         <div class="col-lg-3 col-6">
           <!-- small box -->
@@ -155,7 +162,9 @@
             <div class="icon">
               <i class="fas fa-clock-rotate-left"></i>
             </div>
+            <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=backorder_list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <?php endif; ?>
           </div>
         </div>
         <!-- ./col -->
@@ -173,7 +182,9 @@
             <div class="icon">
               <i class="fas fa-solid fa-envelope-open-text"></i>
             </div>
+            <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=inventory_request" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <?php endif; ?>
           </div>
         </div>
         <!-- ./col -->
@@ -191,7 +202,9 @@
             <div class="icon">
               <i class="fas fa-rotate-right"></i>
             </div>
+            <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=return_list_supplier" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <?php endif; ?>
           </div>
         </div>
         <!-- ./col -->
@@ -209,12 +222,13 @@
             <div class="icon">
               <i class="fas fa-users"></i>
             </div>
+            <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <?php endif; ?>
           </div>
         </div>
         <!-- ./col -->
       </div>
-    <?php endif; ?>
     <!-- /.row -->
 
     <!-- Main row -->
@@ -492,7 +506,9 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
+          <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="btn btn-sm btn-info float-left">Place New Order</a>
+          <?php endif; ?>
             <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="btn btn-sm btn-secondary float-right">View All Sales</a>
           </div>
           <!-- /.card-footer -->
@@ -564,7 +580,9 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
+          <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=purchase_order_list/manage_purchase_order_list" class="btn btn-sm btn-info float-left">Place New Order</a>
+          <?php endif; ?> 
             <a href="<?php echo base_url ?>admin/?page=purchase_order_list" class="btn btn-sm btn-secondary float-right">View All Sales</a>
           </div>
           <!-- /.card-footer -->
