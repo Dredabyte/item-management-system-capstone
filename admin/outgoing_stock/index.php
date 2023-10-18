@@ -31,7 +31,7 @@
       <div class="col-12">
         <div class="card card-outline card-warning">
           <div class="card-header">
-            <h3 class="card-title">Outgoing Stocks</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <!-- <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="btn btn-block btn-outline-dark">

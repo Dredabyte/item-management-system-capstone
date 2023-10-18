@@ -31,7 +31,7 @@
       <div class="col-12">
         <div class="card card-outline card-success">
           <div class="card-header">
-            <h3 class="card-title">Incoming Stocks</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
             </div>
           </div>

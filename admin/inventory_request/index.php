@@ -11,7 +11,7 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1 class="m-0">Inventory Request List</h1>
-        <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur commodi cupiditate totam obcaecati facere quas molestiae qui officia rem ex, maxime voluptate praesentium mollitia ducimus nisi beatae! Aliquam, nulla quo?</p>
+        <p class="mb-0">The inventory request list was submitted to the procurement department to replenish essential supplies for the upcoming project. It meticulously detailed the specific items, quantities, and delivery deadlines to ensure a smooth and efficient restocking process.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -31,7 +31,7 @@
       <div class="col-12">
         <div class="card card-outline card-purple">
           <div class="card-header">
-            <h3 class="card-title">Inventory Request List</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=inventory_request/manage_inventory_request" class="btn btn-block btn-outline-dark">
@@ -68,7 +68,7 @@
                     <td><?php echo $row['ir_code'] ?></td>
                     <td><?php echo $row['users'] ?></td>
                     <td><?php echo number_format($row['items']) ?></td>
-                    <td><?php echo number_format($row['amount'], 2) ?></td>
+                    <td>₱ <?php echo number_format($row['amount'], 2) ?></td>
                     <td>
                       <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
                         Action

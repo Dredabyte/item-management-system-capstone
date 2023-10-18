@@ -46,7 +46,7 @@
           <div class="col-12">
             <div class="card card card-outline card-pink">
               <div class="card-header">
-                <h3 class="card-title">List of System Users</h3>
+                <h3 class="card-title"></h3>
                 <div class="card-tools">
                   <div class="input-group-append">
                     <a href="?page=system_user/manage_profile" class="btn btn-block btn-outline-dark"></span>

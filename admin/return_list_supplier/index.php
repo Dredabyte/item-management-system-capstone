@@ -31,7 +31,7 @@
       <div class="col-12">
         <div class="card card-outline card-orange">
           <div class="card-header">
-            <h3 class="card-title">Return Lists - Suppliers</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=return_list_supplier/manage_return_list_supplier" class="btn btn-block btn-outline-dark"></span>

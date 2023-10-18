@@ -29,7 +29,7 @@
       <div class="col-12">
         <div class="card card-outline card-navy">
           <div class="card-header">
-            <h3 class="card-title">Purchase Orders</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=purchase_order_list/manage_purchase_order_list" class="btn btn-block btn-outline-dark">

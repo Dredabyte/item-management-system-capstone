@@ -1,19 +1,19 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1 class="m-0">Create | Edit Inventory Request</h1>
-      </div><!-- /.col -->
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?php echo base_url.'admin?page=inventory_request' ?>">Inventory Request List</a></li>
-          <li class="breadcrumb-item active">Create | Edit Inventory Request</li>
-        </ol>
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Create | Edit Inventory Request</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo base_url . 'admin?page=inventory_request' ?>">Inventory Request List</a></li>
+                    <li class="breadcrumb-item active">Create | Edit Inventory Request</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 
@@ -161,10 +161,10 @@ if (isset($_GET['id'])) {
                                         <?php echo $row['description']; ?>
                                     </td>
                                     <td class="py-1 px-2 text-right cost">
-                                        <?php echo number_format($row['price']); ?>
+                                        ₱ <?php echo number_format($row['price'], 2); ?>
                                     </td>
                                     <td class="py-1 px-2 text-right total">
-                                        <?php echo number_format($row['total']); ?>
+                                        ₱ <?php echo number_format($row['total'], 2); ?>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -173,9 +173,9 @@ if (isset($_GET['id'])) {
                     <tfoot>
                         <tr>
                             <th class="text-right py-1 px-2" colspan="5">Total
-                                <input type="hidden" name="amount" value="<?php echo isset($discount) ? $discount : 0 ?>">
+                                <input type="hidden" name="amount" value="<?php echo isset($discount) ? number_format($discount, 2) : 0 ?>">
                             </th>
-                            <th class="text-right py-1 px-2 grand-total">0</th>
+                            <th class="text-right py-1 px-2 grand-total">0.00</th>
                         </tr>
                     </tfoot>
                 </table>

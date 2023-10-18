@@ -72,7 +72,7 @@
       <div class="col-6" id="brand">
         <div class="card card-outline card-success">
           <div class="card-header">
-            <h3 class="card-title">Brand Lists</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="javascript:void(0)" id="create_new_brand" class="btn btn-block btn-outline-dark">
@@ -132,7 +132,7 @@
       <div class="col-6" id="category">
         <div class="card card-outline card-warning">
           <div class="card-header">
-            <h3 class="card-title">Category Lists</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
                 <a href="javascript:void(0)" id="create_new_category" class="btn btn-block btn-outline-dark">

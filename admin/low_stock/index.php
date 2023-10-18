@@ -83,7 +83,7 @@
       <div class="col-12">
         <div class="card card-outline card-danger">
           <div class="card-header">
-            <h3 class="card-title">Low Stock</h3>
+            <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
               </div>
