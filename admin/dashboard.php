@@ -26,6 +26,49 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
+
+    <!-- graph start -->
+    <div class="row">
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- DONUT CHART -->
+              <div class="card card-yellow">
+                <div class="card-header">
+                  <h3 class="card-title">Donut Chart</h3>
+                </div>
+                <div class="card-body">
+                  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col (LEFT) -->
+            <div class="col-md-6">
+              <!-- BAR CHART -->
+              <div class="card card-orange">
+                <div class="card-header">
+                  <h3 class="card-title">Bar Chart</h3>
+                </div>
+                <div class="card-body">
+                  <div class="chart">
+                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col (RIGHT) -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+    </div>
+    <!-- /graph ends -->
+
     <!-- Small boxes (Stat box) -->
     <div class="row">
       <div class="col-lg-3 col-6">
@@ -56,7 +99,7 @@
             <i class="fas fa-light fa-box"></i>
           </div>
           <?php if ($_settings->userdata('type') == 1) : ?>
-          <a href="<?php echo base_url ?>admin/?page=stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url ?>admin/?page=stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           <?php endif; ?>
         </div>
       </div>
@@ -76,7 +119,7 @@
             <i class="fas fa-right-to-bracket"></i>
           </div>
           <?php if ($_settings->userdata('type') == 1) : ?>
-          <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           <?php endif; ?>
         </div>
       </div>
@@ -96,7 +139,7 @@
             <i class="fas fa-right-from-bracket"></i>
           </div>
           <?php if ($_settings->userdata('type') == 1) : ?>
-          <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           <?php endif; ?>
         </div>
       </div>
@@ -139,7 +182,7 @@
             <i class="fas fa-exclamation-triangle"></i>
           </div>
           <?php if ($_settings->userdata('type') == 1) : ?>
-          <a href="<?php echo base_url ?>admin/?page=low_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url ?>admin/?page=low_stock" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           <?php endif; ?>
         </div>
       </div>
@@ -147,100 +190,100 @@
     </div>
     <!-- /.row -->
 
-      <div class="row">
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-teal">
-            <div class="inner">
-              <h3>
-                <?php
-                echo $conn->query("SELECT * FROM `backorder_list` where id != 1 ")->num_rows;
-                ?>
-              </h3>
-              <p>Back Orders</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-clock-rotate-left"></i>
-            </div>
-            <?php if ($_settings->userdata('type') == 1) : ?>
+    <div class="row">
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-teal">
+          <div class="inner">
+            <h3>
+              <?php
+              echo $conn->query("SELECT * FROM `backorder_list` where id != 1 ")->num_rows;
+              ?>
+            </h3>
+            <p>Back Orders</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-clock-rotate-left"></i>
+          </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
             <a href="<?php echo base_url ?>admin/?page=backorder_list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            <?php endif; ?>
-          </div>
+          <?php endif; ?>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-purple">
-            <div class="inner">
-              <h3>
-                <?php
-                echo $conn->query("SELECT * FROM `inventory_request_list` where id != 1 ")->num_rows;
-                ?>
-              </h3>
-              <p>Inventory Request</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-solid fa-envelope-open-text"></i>
-            </div>
-            <?php if ($_settings->userdata('type') == 1) : ?>
-            <a href="<?php echo base_url ?>admin/?page=inventory_request" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            <?php endif; ?>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-orange">
-            <div class="inner">
-              <h3>
-                <?php
-                echo $conn->query("SELECT * FROM `return_list_supplier` where id != 1 ")->num_rows;
-                ?>
-              </h3>
-              <p>Return List - Supplier</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-rotate-right"></i>
-            </div>
-            <?php if ($_settings->userdata('type') == 1) : ?>
-            <a href="<?php echo base_url ?>admin/?page=return_list_supplier" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            <?php endif; ?>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-pink">
-            <div class="inner">
-              <h3>
-                <?php
-                echo $conn->query("SELECT * FROM `users` where id != 1 ")->num_rows;
-                ?>
-              </h3>
-              <p>System Users</p>
-            </div>
-            <div class="icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <?php if ($_settings->userdata('type') == 1) : ?>
-            <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            <?php endif; ?>
-          </div>
-        </div>
-        <!-- ./col -->
       </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-purple">
+          <div class="inner">
+            <h3>
+              <?php
+              echo $conn->query("SELECT * FROM `inventory_request_list` where id != 1 ")->num_rows;
+              ?>
+            </h3>
+            <p>Inventory Request</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-solid fa-envelope-open-text"></i>
+          </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
+            <a href="<?php echo base_url ?>admin/?page=inventory_request" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-orange">
+          <div class="inner">
+            <h3>
+              <?php
+              echo $conn->query("SELECT * FROM `return_list_supplier` where id != 1 ")->num_rows;
+              ?>
+            </h3>
+            <p>Return List - Supplier</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-rotate-right"></i>
+          </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
+            <a href="<?php echo base_url ?>admin/?page=return_list_supplier" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <!-- ./col -->
+      <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-pink">
+          <div class="inner">
+            <h3>
+              <?php
+              echo $conn->query("SELECT * FROM `users` where id != 1 ")->num_rows;
+              ?>
+            </h3>
+            <p>System Users</p>
+          </div>
+          <div class="icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <?php if ($_settings->userdata('type') == 1) : ?>
+            <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <!-- ./col -->
+    </div>
     <!-- /.row -->
 
     <!-- Main row -->
     <div class="row">
       <!-- Left col -->
       <section class="col-lg-6">
-        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <!-- <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
 
-        <style>
+        <!-- <style>
           .highcharts-figure,
           .highcharts-data-table table {
             min-width: 320px;
@@ -284,13 +327,13 @@
           .highcharts-data-table tr:hover {
             background: #f1f7ff;
           }
-        </style>
+        </style> -->
 
-        <figure class="highcharts-figure">
+        <!-- <figure class="highcharts-figure">
           <div id="container"></div>
-        </figure>
+        </figure> -->
 
-        <?php
+        <!-- <-?php
         require_once '../config.php';
 
         $sql = "SELECT sl.item_id, sl.quantity, il.name 
@@ -308,9 +351,9 @@
             $quantities[] = (int)$row['quantity'];
           }
         }
-        ?>
+        ?> -->
 
-        <script>
+        <!-- <script>
           Highcharts.chart('container', {
             chart: {
               type: 'bar'
@@ -319,7 +362,7 @@
               text: 'Quantity of Items by Item Name'
             },
             xAxis: {
-              categories: <?php echo json_encode($itemNames); ?>,
+              categories: <-?php echo json_encode($itemNames); ?>,
               title: {
                 text: 'Item Name'
               }
@@ -331,20 +374,20 @@
             },
             series: [{
               name: 'Quantity',
-              data: <?php echo json_encode($quantities); ?>
+              data: <-?php echo json_encode($quantities); ?>
             }]
           });
-        </script>
+        </script> -->
       </section>
 
       <!-- Right col -->
       <section class="col-lg-6">
-        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <!-- <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
 
-        <style>
+        <!-- <style>
           .highcharts-figure,
           .highcharts-data-table table {
             min-width: 320px;
@@ -388,13 +431,13 @@
           .highcharts-data-table tr:hover {
             background: #f1f7ff;
           }
-        </style>
+        </style> -->
 
-        <figure class="highcharts-figure">
+        <!-- <figure class="highcharts-figure">
           <div id="container2"></div>
-        </figure>
+        </figure> -->
 
-        <?php
+        <!-- <-?php
         require_once '../config.php';
 
         $sql = "SELECT sl.item_id, il.name, sl.quantity 
@@ -413,11 +456,9 @@
             );
           }
         }
-        ?>
+        ?> -->
 
-
-
-        <script>
+        <!-- <script>
           Highcharts.chart('container2', {
             chart: {
               plotBackgroundColor: null,
@@ -450,10 +491,10 @@
             series: [{
               name: 'Quantity',
               colorByPoint: true,
-              data: <?php echo json_encode($data); ?>
+              data: <-?php echo json_encode($data); ?>
             }]
           });
-        </script>
+        </script> -->
 
       </section>
     </div>
@@ -506,9 +547,9 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
-          <?php if ($_settings->userdata('type') == 1) : ?>
-            <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="btn btn-sm btn-info float-left">Place New Order</a>
-          <?php endif; ?>
+            <?php if ($_settings->userdata('type') == 1) : ?>
+              <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="btn btn-sm btn-info float-left">Place New Order</a>
+            <?php endif; ?>
             <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="btn btn-sm btn-secondary float-right">View All Sales</a>
           </div>
           <!-- /.card-footer -->
@@ -580,9 +621,9 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
-          <?php if ($_settings->userdata('type') == 1) : ?>
-            <a href="<?php echo base_url ?>admin/?page=purchase_order_list/manage_purchase_order_list" class="btn btn-sm btn-info float-left">Place New Order</a>
-          <?php endif; ?> 
+            <?php if ($_settings->userdata('type') == 1) : ?>
+              <a href="<?php echo base_url ?>admin/?page=purchase_order_list/manage_purchase_order_list" class="btn btn-sm btn-info float-left">Place New Order</a>
+            <?php endif; ?>
             <a href="<?php echo base_url ?>admin/?page=purchase_order_list" class="btn btn-sm btn-secondary float-right">View All Sales</a>
           </div>
           <!-- /.card-footer -->

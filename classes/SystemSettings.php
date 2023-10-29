@@ -44,6 +44,8 @@ class SystemSettings extends DBConnection{
 			file_put_contents("../{$k}.html",$v);
 
 		}
+
+		$resp = [];
 		
 		if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
 			$fname = 'uploads/logo-'.(time()).'.png';
