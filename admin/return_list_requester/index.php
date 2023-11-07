@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Return Lists - Requesters</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Wrapper. Contains page content -->

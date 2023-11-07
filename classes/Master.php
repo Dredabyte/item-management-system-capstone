@@ -149,7 +149,6 @@ class Master extends DBConnection
 		extract($_POST);
 		$data = "";
 	
-		// Construct the data string for SQL
 		foreach ($_POST as $k => $v) {
 			if (!in_array($k, array('id'))) {
 				$v = $this->conn->real_escape_string($v);
@@ -158,13 +157,12 @@ class Master extends DBConnection
 			}
 		}
 	
-		// Check if the item already exists
 		$check = $this->conn->query("SELECT * FROM `item_list` where `name` = '{$name}' and `supplier_id` = '{$supplier_id}' " . (!empty($id) ? " and id != {$id} " : "") . " ")->num_rows;
 	
 		if ($this->capture_err())
 			return $this->capture_err();
 	
-		$resp = []; // Initialize the $resp array
+		$resp = [];
 	
 		if ($check > 0) {
 			$resp['status'] = 'failed';
@@ -173,8 +171,7 @@ class Master extends DBConnection
 		}
 	
 		if (isset($_FILES['image']) && $_FILES['image']['tmp_name'] != '') {
-			// Handle image upload for a new item
-			$fname = 'item_image/item_image-' . uniqid() . '.png'; // Use a unique identifier
+			$fname = 'item_image/item_image-' . uniqid() . '.png';
 			$dir_path = base_app . $fname;
 			$upload = $_FILES['image']['tmp_name'];
 			$type = mime_content_type($upload);
@@ -183,8 +180,8 @@ class Master extends DBConnection
 			if (!in_array($type, $allowed)) {
 				$resp['msg'] = "Image failed to upload due to an invalid file type.";
 			} else {
-				$new_height = 200;
-				$new_width = 450;
+				$new_height = 300;
+				$new_width = 400;
 	
 				list($width, $height) = getimagesize($upload);
 				$t_image = imagecreatetruecolor($new_width, $new_height);
@@ -210,7 +207,6 @@ class Master extends DBConnection
 		}
 	
 		if (empty($id)) {
-			// When adding a new item, insert the data and the new image filename
 			$sql = "INSERT INTO `item_list` SET `image` = '{$fname}', {$data}";
 		} else {
 			$sql = "UPDATE `item_list` SET {$data} WHERE id = '{$id}'";

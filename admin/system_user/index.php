@@ -1,6 +1,5 @@
 <!--Title Header-->
   <title>Item Management System - Profile</title>
-  </head>
 <!--Title Header ends-->
 
     <!-- Content Header (Page header) -->

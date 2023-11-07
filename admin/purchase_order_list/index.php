@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Purchase Order Lists</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Header (Page header) -->

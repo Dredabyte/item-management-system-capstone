@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Add/Manage System User</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Header (Page header) -->
@@ -84,6 +83,7 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                             <select name="type" id="type" class="custom-select" value="<?php echo isset($meta['type']) ? $meta['type'] : '' ?>" required>
                                 <option value="1" <?php echo isset($type) && $type == 1 ? 'selected' : '' ?>>Administrator</option>
                                 <option value="2"> <?php echo isset($type) && $type == 2 ? 'selected' : '' ?>Staff</option>
+                                <option value="3"> <?php echo isset($type) && $type == 3 ? 'selected' : '' ?>Manager</option>
                             </select>
                         </div>
                         <div class="form-group">

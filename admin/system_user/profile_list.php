@@ -1,6 +1,5 @@
 <!--Title Header-->
   <title>Item Management System - Master Lists - System Users</title>
-  </head>
 <!--Title Header ends-->
 
     <!-- Content Header (Page header) -->
@@ -81,7 +80,22 @@
                         <td><img src="<?php echo validate_image($row['avatar']) ?>" class="img-avatar img-thumbnail p-0 border-2" alt="User Image"></td>
                         <td><?php echo ucwords($row['name']) ?></td>
                         <td><?php echo $row['username'] ?></td>
-                        <td><?php echo ($row['type'] == 1 )? "Adminstrator" : "Staff" ?></td>
+                        <td>
+                          <?php 
+                          if ($row['type'] == 1) {
+                            echo "Administrator";
+                          }
+                          elseif ($row['type'] == 2) {
+                            echo "Staff";     
+                          }
+                          elseif ($row['type'] == 3) {
+                            echo "Manager";
+                          }
+                          else {
+                            echo "Unknown";
+                          }       
+                          ?>
+                        </td>
                         <td>
                           <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                 Action

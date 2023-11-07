@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Low Stocks</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Wrapper. Contains page content -->

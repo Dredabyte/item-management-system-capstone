@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Brand & Category Lists</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Wrapper. Contains page content -->

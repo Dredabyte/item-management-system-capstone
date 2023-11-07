@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Dashboard</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Wrapper. Contains page content -->
@@ -26,49 +25,6 @@
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-
-    <!-- graph start -->
-    <div class="row">
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-6">
-              <!-- DONUT CHART -->
-              <div class="card card-yellow">
-                <div class="card-header">
-                  <h3 class="card-title">Donut Chart</h3>
-                </div>
-                <div class="card-body">
-                  <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!-- /.col (LEFT) -->
-            <div class="col-md-6">
-              <!-- BAR CHART -->
-              <div class="card card-orange">
-                <div class="card-header">
-                  <h3 class="card-title">Bar Chart</h3>
-                </div>
-                <div class="card-body">
-                  <div class="chart">
-                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                  </div>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-            </div>
-            <!-- /.col (RIGHT) -->
-          </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </section>
-    </div>
-    <!-- /graph ends -->
-
     <!-- Small boxes (Stat box) -->
     <div class="row">
       <div class="col-lg-3 col-6">
@@ -274,228 +230,278 @@
     </div>
     <!-- /.row -->
 
-    <!-- Main row -->
+    <!-- GRAPH START -->
     <div class="row">
-      <!-- Left col -->
-      <section class="col-lg-6">
-        <!-- <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- BAR CHART -->
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                    Incoming Order Items
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="chart">
+                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
 
-        <!-- <style>
-          .highcharts-figure,
-          .highcharts-data-table table {
-            min-width: 320px;
-            max-width: 660px;
-            margin: 1em auto;
-            border: 3px solid;
-            border-radius: 3px;
-          }
+            <?php
+            require_once '../config.php';
 
-          .highcharts-data-table table {
-            border-collapse: collapse;
-            border: 1px solid #ebebeb;
-            margin: 10px auto;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-          }
+            $sql = "SELECT
+        il.name AS item_name,
+        i.item_id,
+        SUM(CASE WHEN i.type = 1 THEN i.quantity ELSE -i.quantity END) AS remaining_quantity
+      FROM stock_list i
+      INNER JOIN item_list il ON i.item_id = il.id
+      GROUP BY il.name, i.item_id;";
 
-          .highcharts-data-table caption {
-            padding: 1em 0;
-            font-size: 1.2em;
-            color: #555;
-          }
+            $getData = $conn->query($sql);
 
-          .highcharts-data-table th {
-            font-weight: 600;
-            padding: 0.5em;
-          }
+            $combinedData = array();
 
-          .highcharts-data-table td,
-          .highcharts-data-table th,
-          .highcharts-data-table caption {
-            padding: 0.5em;
-          }
-
-          .highcharts-data-table thead tr,
-          .highcharts-data-table tr:nth-child(even) {
-            background: #f8f8f8;
-          }
-
-          .highcharts-data-table tr:hover {
-            background: #f1f7ff;
-          }
-        </style> -->
-
-        <!-- <figure class="highcharts-figure">
-          <div id="container"></div>
-        </figure> -->
-
-        <!-- <-?php
-        require_once '../config.php';
-
-        $sql = "SELECT sl.item_id, sl.quantity, il.name 
-        FROM stock_list sl 
-        INNER JOIN item_list il ON sl.item_id = il.id";
-
-        $getData = $conn->query($sql);
-
-        $itemNames = array();
-        $quantities = array();
-
-        if ($getData->num_rows > 0) {
-          while ($row = $getData->fetch_assoc()) {
-            $itemNames[] = $row['name'];
-            $quantities[] = (int)$row['quantity'];
-          }
-        }
-        ?> -->
-
-        <!-- <script>
-          Highcharts.chart('container', {
-            chart: {
-              type: 'bar'
-            },
-            title: {
-              text: 'Quantity of Items by Item Name'
-            },
-            xAxis: {
-              categories: <-?php echo json_encode($itemNames); ?>,
-              title: {
-                text: 'Item Name'
+            if ($getData->num_rows > 0) {
+              while ($row = $getData->fetch_assoc()) {
+                $combinedData[] = array(
+                  'item_name' => $row['item_name'],
+                  'remaining_quantity' => $row['remaining_quantity'],
+                );
               }
-            },
-            yAxis: {
-              title: {
-                text: 'Quantity'
+            }
+            ?>
+
+
+            <script>
+              $(function() {
+                var barChartCanvas = $('#barChart').get(0).getContext('2d');
+                var combinedData = <?php echo json_encode($combinedData); ?>;
+
+                var itemNames = combinedData.map(function(item) {
+                  return item.item_name;
+                });
+
+                var quantities = combinedData.map(function(item) {
+                  return item.remaining_quantity;
+                });
+
+                var barChartData = {
+                  labels: itemNames,
+                  datasets: [{
+                    label: 'Item Quantity',
+                    backgroundColor: 'rgba(0, 71, 112,0.9)',
+                    borderColor: 'rgba(0, 71, 112,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(0, 71, 112,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(0, 71, 112,1)',
+                    data: quantities
+                  }]
+                };
+
+                var barChartOptions = {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  datasetFill: false
+                };
+
+                new Chart(barChartCanvas, {
+                  type: 'bar',
+                  data: barChartData,
+                  options: barChartOptions
+                });
+              });
+            </script>
+            <!-- /BAR CHART -->
+
+
+            <!-- BAR CHART for outgoing -->
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="far fa-chart-bar"></i>
+                    Outgoing Order Items
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <div class="chart">
+                    <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+
+            <?php
+            require_once '../config.php';
+
+            $sql = "SELECT i.item_id, i.quantity, il.name AS item_name
+            FROM stock_list i
+            INNER JOIN item_list il ON i.item_id = il.id
+            WHERE i.type = 2;";
+
+            $getData = $conn->query($sql);
+
+            $combinedData = array();
+
+            if ($getData->num_rows > 0) {
+              while ($row = $getData->fetch_assoc()) {
+                $combinedData[] = array(
+                  'item_name' => $row['item_name'],
+                  'quantity' => $row['quantity'],
+                );
               }
-            },
-            series: [{
-              name: 'Quantity',
-              data: <-?php echo json_encode($quantities); ?>
-            }]
-          });
-        </script> -->
+            }
+            ?>
+
+            <script>
+              $(function() {
+                var barChartCanvas = $('#barChart2').get(0).getContext('2d');
+                var combinedData = <?php echo json_encode($combinedData); ?>;
+
+                var itemNames = combinedData.map(function(item) {
+                  return item.item_name;
+                });
+
+                var quantities = combinedData.map(function(item) {
+                  return item.quantity;
+                });
+
+                var barChartData = {
+                  labels: itemNames,
+                  datasets: [{
+                    label: 'Item Quantity',
+                    backgroundColor: 'rgba(0, 71, 112,0.9)',
+                    borderColor: 'rgba(0, 71, 112,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(0, 71, 112,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(0, 71, 112,1)',
+                    data: quantities
+                  }]
+                };
+
+                var barChartOptions = {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  datasetFill: false
+                };
+
+                new Chart(barChartCanvas, {
+                  type: 'bar',
+                  data: barChartData,
+                  options: barChartOptions
+                });
+              });
+            </script>
+            <!-- /BAR CHART outgoing -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
       </section>
+    </div>
+    <!-- /BAR CHART ENDS -->
 
-      <!-- Right col -->
-      <section class="col-lg-6">
-        <!-- <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+    <!-- DONUT CHART -->
+    <div class="row">
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="fas fa-chart-pie mr-1"></i>
+                    Low Stocks Items
+                  </h3>
+                </div>
+                <div class="card-body">
+                  <canvas id="donutChart" style="min-height: 475px; height: 475px; max-height: 475px; max-width: 100%; display: flex; justify-content: center; align-items: center;"></canvas>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
 
-        <!-- <style>
-          .highcharts-figure,
-          .highcharts-data-table table {
-            min-width: 320px;
-            max-width: 660px;
-            margin: 1em auto;
-            border: 3px solid;
-            border-radius: 3px;
+          <?php
+          require_once '../config.php';
+
+          $sql = "SELECT sl.item_id, sl.quantity, il.name 
+              FROM stock_list sl 
+              INNER JOIN item_list il ON sl.item_id = il.id
+              WHERE sl.quantity < 200";
+
+          $getData = $conn->query($sql);
+
+          $itemNames = array();
+          $quantities = array();
+
+          if ($getData->num_rows > 0) {
+            while ($row = $getData->fetch_assoc()) {
+              $itemNames[] = $row['name'];
+              $quantities[] = (int)$row['quantity'];
+            }
           }
+          ?>
 
-          .highcharts-data-table table {
-            border-collapse: collapse;
-            border: 1px solid #ebebeb;
-            margin: 10px auto;
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-          }
+          <script>
+            $(function() {
+              var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
+              var itemNames = <?php echo json_encode($itemNames); ?>;
+              var quantities = <?php echo json_encode($quantities); ?>;
 
-          .highcharts-data-table caption {
-            padding: 1em 0;
-            font-size: 1.2em;
-            color: #555;
-          }
-
-          .highcharts-data-table th {
-            font-weight: 600;
-            padding: 0.5em;
-          }
-
-          .highcharts-data-table td,
-          .highcharts-data-table th,
-          .highcharts-data-table caption {
-            padding: 0.5em;
-          }
-
-          .highcharts-data-table thead tr,
-          .highcharts-data-table tr:nth-child(even) {
-            background: #f8f8f8;
-          }
-
-          .highcharts-data-table tr:hover {
-            background: #f1f7ff;
-          }
-        </style> -->
-
-        <!-- <figure class="highcharts-figure">
-          <div id="container2"></div>
-        </figure> -->
-
-        <!-- <-?php
-        require_once '../config.php';
-
-        $sql = "SELECT sl.item_id, il.name, sl.quantity 
-        FROM stock_list sl
-        INNER JOIN item_list il ON sl.item_id = il.id
-        WHERE sl.quantity < 200";
-        $getData = $conn->query($sql);
-
-        $data = array();
-
-        if ($getData->num_rows > 0) {
-          while ($row = $getData->fetch_assoc()) {
-            $data[] = array(
-              'name' => $row['name'],
-              'y' => (int)$row['quantity']
-            );
-          }
-        }
-        ?> -->
-
-        <!-- <script>
-          Highcharts.chart('container2', {
-            chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: 'pie'
-            },
-            title: {
-              text: 'Low Stock Items',
-              align: 'left'
-            },
-            tooltip: {
-              pointFormat: '{series.name}: <b>{point.y}</b>'
-            },
-            accessibility: {
-              point: {
-                valueSuffix: '%'
+              // Generate random background colors
+              var randomColors = [];
+              for (var i = 0; i < itemNames.length; i++) {
+                randomColors.push(getRandomColor());
               }
-            },
-            plotOptions: {
-              pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                  enabled: false
-                },
-                showInLegend: true
-              }
-            },
-            series: [{
-              name: 'Quantity',
-              colorByPoint: true,
-              data: <-?php echo json_encode($data); ?>
-            }]
-          });
-        </script> -->
 
+              var donutData = {
+                labels: itemNames,
+                datasets: [{
+                  data: quantities,
+                  backgroundColor: randomColors,
+                }]
+              };
+
+              var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+              };
+
+              new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+              });
+
+              // Function to generate random colors
+              function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                  color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+              }
+            });
+          </script>
+          <!-- DONUT CHART -->
+        </div>
       </section>
     </div>
 

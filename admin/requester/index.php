@@ -1,6 +1,5 @@
 <!--Title Header-->
 <title>Item Management System - Requesters</title>
-</head>
 <!--Title Header ends-->
 
 <!-- Content Wrapper. Contains page content -->
@@ -45,7 +44,7 @@
             <h3 class="card-title"></h3>
             <div class="card-tools">
               <div class="input-group-append">
-                <a href="javascript:void(0)" id="create_new" class="btn btn-block btn-outline-dark"></span>
+                <a href="javascript:void(0)" id="create_new" class="btn btn-block btn-outline-dark">
                   Create New
                   <i class="fas fa-plus"></i>
                 </a>

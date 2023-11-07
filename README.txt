@@ -11,8 +11,10 @@ Report management
 User wise sell report
 
 #Requirement
-XAMPP or WAMP
+XAMPP
 header('location: http://localhost/<foldername>/index.php');
+use the database name: imsc_db.sql (found in the database folder)
+
 
 Account:
 
