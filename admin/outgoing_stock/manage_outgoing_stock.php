@@ -138,9 +138,9 @@ if (isset($_GET['id'])) {
                         <col width="5%">
                         <col width="10%">
                         <col width="10%">
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
+                        <col width="45%">
+                        <col width="15%">
+                        <col width="15%">
                     </colgroup>
                     <thead>
                         <tr class="text-light bg-navy">

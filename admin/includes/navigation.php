@@ -35,7 +35,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <!-- THIS NAVIGATION SECTION IS INTEDED TO ADMIN & MANAGER  -->
+
+        <!-- THIS NAVIGATION SECTION IS INTEDED TO ADMIN -->
           <?php if ($_settings->userdata('type') == 1) : ?>
             <li class="nav-item">
               <!--Dashboard Start-->
@@ -286,7 +287,7 @@
             </li>
           <?php endif; ?>
 
-          <!-- THIS NAVIGATION SECTION IS INTEDED TO STAFF  -->
+        <!-- THIS NAVIGATION SECTION IS INTEDED TO STAFF  -->
           <?php if ($_settings->userdata('type') == 2) : ?>
             <li class="nav-item">
               <!--Dashboard Start-->
@@ -398,8 +399,216 @@
                 </p>
               </a>
             </li>
-
           <?php endif; ?>
+
+          <!-- THIS NAVIGATION SECTION IS INTEDED TO MANAGER  -->
+          <?php if ($_settings->userdata('type') == 3) : ?>
+            <li class="nav-item">
+              <!--Dashboard Start-->
+              <a href="./" class="nav-link nav-dashboard">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  DASHBOARD
+                </p>
+              </a>
+            </li>
+            <!--Dashboard End-->
+
+
+            <!--Order Lists Start-->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-list-check"></i>
+                <p>ORDER LISTS</p>
+                <i class="right fas fa-angle-left"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <!--Inventory Request -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=inventory_request" class="nav-link nav-inventory_request">
+                    <i class="nav-icon fas fa-solid fa-envelope-open-text"></i>
+                    <p>
+                      Inventory Request
+                    </p>
+                  </a>
+                </li>
+
+                <!--Purchase Order -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=purchase_order_list" class="nav-link nav-purchase_order_list">
+                    <i class="nav-icon fas fa-cart-arrow-down"></i>
+                    <p>
+                      Purchase Order List
+                    </p>
+                  </a>
+                </li>
+
+                <!--Back Order -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=backorder_list" class="nav-link nav-backorder_list">
+                    <i class="nav-icon fas fa-clock-rotate-left"></i>
+                    <p>
+                      Back Order List
+                    </p>
+                  </a>
+                </li>
+
+                <!--Dispense Product -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="nav-link nav-dispense">
+                    <i class="nav-icon fas fa-share-from-square"></i>
+                    <p>
+                      Dispense Product
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--Order Lists End-->
+
+            <!--Transactions  Start-->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-receipt"></i>
+                <p>TRANSACTIONS</p>
+                <i class="right fas fa-angle-left"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <!--Incoming Stocks -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="nav-link nav-incoming_stock">
+                    <i class="nav-icon fas fa-right-to-bracket"></i>
+                    <p>
+                      Incoming Stocks
+                    </p>
+                  </a>
+                </li>
+
+                <!--Outgoing Stocks -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="nav-link nav-outgoing_stock">
+                    <i class="nav-icon fas fa-right-from-bracket"></i>
+                    <p>
+                      Outgoing Stocks
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--Outgoing Stocks End-->
+
+            <!--Item List  Start-->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-box"></i>
+                <p>ITEMS</p>
+                <i class="right fas fa-angle-left"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <!-- <li class="nav-item">
+                <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
+                  <i class="nav-icon fas fa-solid fa-bicycle"></i>
+                  <p>
+                    Bike Parts
+                  </p>
+                </a>
+              </li> -->
+
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=item_list" class="nav-link nav-item_list">
+                    <i class="nav-icon fas fa-boxes"></i>
+                    <p>
+                      Item Lists
+                    </p>
+                  </a>
+                </li>
+
+                <!--Stock List -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=stock" class="nav-link nav-stock">
+                    <i class="nav-icon fas fa-warehouse"></i>
+                    <p>
+                      Stocks
+                    </p>
+                  </a>
+                </li>
+
+                <!--Low Stock -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=low_stock" class="nav-link nav-low_stock">
+                    <i class="nav-icon fas fa-exclamation-triangle"></i>
+                    <p>
+                      Low Stocks
+                    </p>
+                  </a>
+                </li>
+
+                <!--Brand & Category -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=brand_category" class="nav-link nav-brand_category">
+                    <i class="nav-icon fas fa-edit"></i>
+                    <p>
+                      Brand & Category/s
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- Item List End-->
+
+
+            <!--Master List Start-->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-users-between-lines"></i>
+                <p>MASTER LISTS</p>
+                <i class="right fas fa-angle-left"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <!--Supplier -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=supplier" class="nav-link nav-supplier">
+                    <i class="nav-icon fas fa-address-book"></i>
+                    <p>
+                      Suppliers
+                    </p>
+                  </a>
+                </li>
+
+                <!--Requester -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=requester" class="nav-link nav-requester">
+                    <i class="nav-icon fas fa-address-book"></i>
+                    <p>
+                      Requesters
+                    </p>
+                  </a>
+                </li>
+
+                <!--System Users -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="nav-link nav-system_user">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                      System Users
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--System Users End-->
+
+            <!--Reports Start-->
+            <li class="nav-item">
+              <a href="<?php echo base_url ?>admin/?page=report" class="nav-link nav-report">
+                <i class="nav-icon fas fa-file-circle-check"></i>
+                <p>
+                  REPORTS
+                </p>
+              </a>
+            </li>
+          <?php endif; ?>
+
           <!--Reports Ends-->
         </ul>
       </nav>
@@ -424,7 +633,7 @@
             parentTreeview.parent().addClass('menu-open');
         }
     });
-</script-->
+  </script-->
   <script>
     var page;
     $(document).ready(function() {

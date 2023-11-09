@@ -416,7 +416,7 @@
     <!-- /BAR CHART ENDS -->
 
     <!-- DONUT CHART -->
-    <div class="row">
+    <!-- <div class="row">
       <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -431,13 +431,13 @@
                 <div class="card-body">
                   <canvas id="donutChart" style="min-height: 475px; height: 475px; max-height: 475px; max-width: 100%; display: flex; justify-content: center; align-items: center;"></canvas>
                 </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
+                <-- /.card-body -->
+              <!-- </div> -->
+              <!-- /.card --/>
             </div>
-          </div>
+          </div> -->
 
-          <?php
+          <!-- </?php
           require_once '../config.php';
 
           $sql = "SELECT sl.item_id, sl.quantity, il.name 
@@ -456,13 +456,13 @@
               $quantities[] = (int)$row['quantity'];
             }
           }
-          ?>
+          ?> -->
 
-          <script>
+          <!-- <script>
             $(function() {
               var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
-              var itemNames = <?php echo json_encode($itemNames); ?>;
-              var quantities = <?php echo json_encode($quantities); ?>;
+              var itemNames = </?php echo json_encode($itemNames); ?>;
+              var quantities = </?php echo json_encode($quantities); ?>;
 
               // Generate random background colors
               var randomColors = [];
@@ -499,11 +499,11 @@
                 return color;
               }
             });
-          </script>
+          </script> -->
           <!-- DONUT CHART -->
-        </div>
+        <!-- </div>
       </section>
-    </div>
+    </div> -->
 
     <!-- Main row -->
     <div class="row">
