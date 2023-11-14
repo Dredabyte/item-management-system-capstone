@@ -53,7 +53,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/shifters.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/shifters" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -68,7 +68,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/brakes.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/brakes" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -83,7 +83,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/tires_tubes.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/tires_tubes" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -104,7 +104,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/wheels_rims_spokes.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/wheels_rims_spokes" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -119,7 +119,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/handlebars.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/handlebars" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -134,7 +134,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/stems.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/stems" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -149,7 +149,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/seatposts.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/seatposts" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -170,7 +170,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/saddles.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/saddles" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -185,7 +185,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/pedals.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/pedals" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -200,7 +200,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/frames.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/frames" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -215,7 +215,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/kits.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/build_kits" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -236,7 +236,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/forks.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/forks" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -251,7 +251,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/rear_shocks.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/rear_shocks" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -266,7 +266,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/headsets.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/headsets" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -281,7 +281,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/cables.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/cables" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -302,7 +302,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/hubs.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/hubs" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -317,7 +317,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/axles.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/thru_axles" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -332,7 +332,7 @@
                     <div class="icon">
                         <img class="img-fluid" src="<?php echo base_url ?>dist/img/categories/bearings.jpg" alt="Photo">
                     </div>
-                    <a href="<?php echo base_url ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url ?>admin/?page=bike_parts/bearings" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

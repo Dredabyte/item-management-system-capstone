@@ -36,7 +36,8 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-        <!-- THIS NAVIGATION SECTION IS INTEDED TO ADMIN -->
+          <!-- THIS NAVIGATION SECTION IS INTEDED TO ADMIN -->
+
           <?php if ($_settings->userdata('type') == 1) : ?>
             <li class="nav-item">
               <!--Dashboard Start-->
@@ -54,36 +55,99 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-list-check"></i>
-                <p>ORDER LISTS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>ORDER LISTS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
               <ul class="nav nav-treeview">
+
                 <!--Inventory Request -->
+                <?php
+                function getInventoryRequestCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS request_count FROM inventory_request_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['request_count'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $requestCount = getInventoryRequestCount();
+                ?>
+
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=inventory_request" class="nav-link nav-inventory_request">
                     <i class="nav-icon fas fa-solid fa-envelope-open-text"></i>
                     <p>
                       Inventory Request
+                      <span class="badge badge-info right"><?php echo $requestCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Purchase Order -->
+                <?php
+                function getPurchaseOrderCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS purchase_order_count FROM purchase_order_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['purchase_order_count'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $purchaseCount = getPurchaseOrderCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=purchase_order_list" class="nav-link nav-purchase_order_list">
                     <i class="nav-icon fas fa-cart-arrow-down"></i>
                     <p>
                       Purchase Order List
+                      <span class="badge badge-info right"><?php echo $purchaseCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Back Order -->
+                <?php
+                function getBackOrderCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS backorder_count FROM backorder_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['backorder_count'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $boCount = getBackOrderCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=backorder_list" class="nav-link nav-backorder_list">
                     <i class="nav-icon fas fa-clock-rotate-left"></i>
                     <p>
                       Back Order List
+                      <span class="badge badge-info right"><?php echo $boCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -106,16 +170,38 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-exchange-alt"></i>
-                <p>RETURN LISTS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>RETURN LISTS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
               <ul class="nav nav-treeview">
+
                 <!--Return List-Supplier -->
+                <?php
+                function getReturnSupplierCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS return_list FROM return_list_supplier";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['return_list'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $returnCount = getReturnSupplierCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=return_list_supplier" class="nav-link nav-return_list_supplier">
                     <i class="nav-icon fas fa-rotate-right"></i>
                     <p>
                       Return List - Suppliers
+                      <span class="badge badge-info right"><?php echo $returnCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -138,26 +224,67 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
-                <p>TRANSACTIONS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>TRANSACTIONS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
               <ul class="nav nav-treeview">
                 <!--Incoming Stocks -->
+                <?php
+                function getIncomingCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS incoming FROM incoming_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['incoming'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $incomingCount = getIncomingCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="nav-link nav-incoming_stock">
                     <i class="nav-icon fas fa-right-to-bracket"></i>
                     <p>
                       Incoming Stocks
+                      <span class="badge badge-info right"><?php echo $incomingCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Outgoing Stocks -->
+                <?php
+                function getOutgoingCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS outgoing FROM outgoing_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['outgoing'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $outgoingCount = getOutgoingCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="nav-link nav-outgoing_stock">
                     <i class="nav-icon fas fa-right-from-bracket"></i>
                     <p>
                       Outgoing Stocks
+                      <span class="badge badge-info right"><?php echo $outgoingCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -169,24 +296,48 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
-                <p>ITEMS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>ITEMS
+                  <i class="right fas fa-angle-left"></i>
+                  <span class="badge bg-white right">New</span>
+                </p>
               </a>
               <ul class="nav nav-treeview">
-                <!-- <li class="nav-item">
-                <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
-                  <i class="nav-icon fas fa-solid fa-bicycle"></i>
-                  <p>
-                    Bike Parts
-                  </p>
-                </a>
-              </li> -->
+                <!-- Bike Parts -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
+                    <i class="nav-icon fas fa-solid fa-bicycle"></i>
+                    <p>
+                      Bike Parts
+                    </p>
+                  </a>
+                </li>
 
+                <!-- Item Lists -->
+                <?php
+                function getItemCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS item FROM item_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['item'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $itemCount = getItemCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=item_list" class="nav-link nav-item_list">
                     <i class="nav-icon fas fa-boxes"></i>
                     <p>
                       Item Lists
+                      <span class="badge badge-info right"><?php echo $itemCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -202,11 +353,37 @@
                 </li>
 
                 <!--Low Stock -->
+                <?php
+                $lowStockThreshold = 200;
+                $query = "SELECT i.*, s.name AS supplier,
+                (COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 1), 0) 
+                - COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 2), 0)) AS available_stock
+                FROM item_list i
+                INNER JOIN supplier_list s ON i.supplier_id = s.id
+                ORDER BY i.name DESC";
+
+                $result = $conn->query($query);
+
+                if ($result) {
+                  $lowStockItemCount = 0;
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      $item_id = $row['id'];
+                      $available_stock = $row['available_stock'];
+
+                      if ($available_stock < $lowStockThreshold) {
+                        $lowStockItemCount++;
+                      }
+                    }
+                  }
+                }
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=low_stock" class="nav-link nav-low_stock">
                     <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>
                       Low Stocks
+                      <span class="badge badge-danger right"><?php echo $lowStockItemCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -234,31 +411,91 @@
               </a>
               <ul class="nav nav-treeview">
                 <!--Supplier -->
+                <?php
+                function getSupplierCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS supplier FROM supplier_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['supplier'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $supplierCount = getSupplierCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=supplier" class="nav-link nav-supplier">
                     <i class="nav-icon fas fa-address-book"></i>
                     <p>
                       Suppliers
+                      <span class="badge badge-info right"><?php echo $supplierCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Requester -->
+                <?php
+                function getRequesterCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS requester FROM requester_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['requester'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $requesterCount = getRequesterCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=requester" class="nav-link nav-requester">
                     <i class="nav-icon fas fa-address-book"></i>
                     <p>
                       Requesters
+                      <span class="badge badge-info right"><?php echo $requesterCount ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--System Users -->
+                <?php
+                function getUserCount()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS user FROM users WHERE id != 1";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['user'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $userCount = getUserCount();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="nav-link nav-system_user">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                       System Users
+                      <span class="badge badge-info right"><?php echo $userCount ?></span>
                     </p>
                   </a>
                 </li>
@@ -287,7 +524,9 @@
             </li>
           <?php endif; ?>
 
-        <!-- THIS NAVIGATION SECTION IS INTEDED TO STAFF  -->
+
+
+          <!-- THIS NAVIGATION SECTION IS INTEDED TO STAFF  -->
           <?php if ($_settings->userdata('type') == 2) : ?>
             <li class="nav-item">
               <!--Dashboard Start-->
@@ -304,24 +543,48 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
-                <p>ITEMS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>ITEMS
+                  <i class="right fas fa-angle-left"></i>
+                  <span class="badge bg-white right">New</span>
+                </p>
               </a>
               <ul class="nav nav-treeview">
-                <!-- <li class="nav-item">
-                <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
-                  <i class="nav-icon fas fa-solid fa-bicycle"></i>
-                  <p>
-                    Bike Parts
-                  </p>
-                </a>
-              </li> -->
+                <!-- Bike Parts -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
+                    <i class="nav-icon fas fa-solid fa-bicycle"></i>
+                    <p>
+                      Bike Parts
+                    </p>
+                  </a>
+                </li>
 
+                <!-- Item Lists -->
+                <?php
+                function getItemCount2()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS item FROM item_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['item'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $itemCount = getItemCount2();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=item_list" class="nav-link nav-item_list">
                     <i class="nav-icon fas fa-boxes"></i>
                     <p>
                       Item Lists
+                      <span class="badge badge-info right"><?php echo $itemCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -337,11 +600,37 @@
                 </li>
 
                 <!--Low Stock -->
+                <?php
+                $lowStockThreshold = 200;
+                $query = "SELECT i.*, s.name AS supplier,
+                (COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 1), 0) 
+                - COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 2), 0)) AS available_stock
+                FROM item_list i
+                INNER JOIN supplier_list s ON i.supplier_id = s.id
+                ORDER BY i.name DESC";
+
+                $result = $conn->query($query);
+
+                if ($result) {
+                  $lowStockItemCount = 0;
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      $item_id = $row['id'];
+                      $available_stock = $row['available_stock'];
+
+                      if ($available_stock < $lowStockThreshold) {
+                        $lowStockItemCount++;
+                      }
+                    }
+                  }
+                }
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=low_stock" class="nav-link nav-low_stock">
                     <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>
                       Low Stocks
+                      <span class="badge badge-danger right"><?php echo $lowStockItemCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -363,26 +652,67 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
-                <p>TRANSACTIONS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>TRANSACTIONS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
               <ul class="nav nav-treeview">
                 <!--Incoming Stocks -->
+                <?php
+                function getIncomingCount2()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS incoming FROM incoming_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['incoming'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $incomingCount = getIncomingCount2();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="nav-link nav-incoming_stock">
                     <i class="nav-icon fas fa-right-to-bracket"></i>
                     <p>
                       Incoming Stocks
+                      <span class="badge badge-info right"><?php echo $incomingCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Outgoing Stocks -->
+                <?php
+                function getOutgoingCount2()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS outgoing FROM outgoing_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['outgoing'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $outgoingCount = getOutgoingCount2();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="nav-link nav-outgoing_stock">
                     <i class="nav-icon fas fa-right-from-bracket"></i>
                     <p>
                       Outgoing Stocks
+                      <span class="badge badge-info right"><?php echo $outgoingCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -400,6 +730,8 @@
               </a>
             </li>
           <?php endif; ?>
+
+
 
           <!-- THIS NAVIGATION SECTION IS INTEDED TO MANAGER  -->
           <?php if ($_settings->userdata('type') == 3) : ?>
@@ -419,36 +751,99 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-list-check"></i>
-                <p>ORDER LISTS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>ORDER LISTS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
               <ul class="nav nav-treeview">
+
                 <!--Inventory Request -->
+                <?php
+                function getInventoryRequestCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS request_count FROM inventory_request_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['request_count'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $requestCount = getInventoryRequestCount3();
+                ?>
+
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=inventory_request" class="nav-link nav-inventory_request">
                     <i class="nav-icon fas fa-solid fa-envelope-open-text"></i>
                     <p>
                       Inventory Request
+                      <span class="badge badge-info right"><?php echo $requestCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Purchase Order -->
+                <?php
+                function getPurchaseOrderCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS purchase_order_count FROM purchase_order_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['purchase_order_count'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $purchaseCount = getPurchaseOrderCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=purchase_order_list" class="nav-link nav-purchase_order_list">
                     <i class="nav-icon fas fa-cart-arrow-down"></i>
                     <p>
                       Purchase Order List
+                      <span class="badge badge-info right"><?php echo $purchaseCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Back Order -->
+                <?php
+                function getBackOrderCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS backorder_count FROM backorder_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['backorder_count'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $boCount = getBackOrderCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=backorder_list" class="nav-link nav-backorder_list">
                     <i class="nav-icon fas fa-clock-rotate-left"></i>
                     <p>
                       Back Order List
+                      <span class="badge badge-info right"><?php echo $boCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -470,26 +865,67 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
-                <p>TRANSACTIONS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>TRANSACTIONS
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
               <ul class="nav nav-treeview">
                 <!--Incoming Stocks -->
+                <?php
+                function getIncomingCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS incoming FROM incoming_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['incoming'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $incomingCount = getIncomingCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=incoming_stock" class="nav-link nav-incoming_stock">
                     <i class="nav-icon fas fa-right-to-bracket"></i>
                     <p>
                       Incoming Stocks
+                      <span class="badge badge-info right"><?php echo $incomingCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Outgoing Stocks -->
+                <?php
+                function getOutgoingCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS outgoing FROM outgoing_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['outgoing'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $outgoingCount = getOutgoingCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=outgoing_stock" class="nav-link nav-outgoing_stock">
                     <i class="nav-icon fas fa-right-from-bracket"></i>
                     <p>
                       Outgoing Stocks
+                      <span class="badge badge-info right"><?php echo $outgoingCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -501,24 +937,48 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-box"></i>
-                <p>ITEMS</p>
-                <i class="right fas fa-angle-left"></i>
+                <p>ITEMS
+                  <i class="right fas fa-angle-left"></i>
+                  <span class="badge bg-white right">New</span>
+                </p>
               </a>
               <ul class="nav nav-treeview">
-                <!-- <li class="nav-item">
-                <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
-                  <i class="nav-icon fas fa-solid fa-bicycle"></i>
-                  <p>
-                    Bike Parts
-                  </p>
-                </a>
-              </li> -->
+                <!-- Bike Parts -->
+                <li class="nav-item">
+                  <a href="<?php echo base_url ?>admin/?page=bike_parts" class="nav-link nav-bike_parts">
+                    <i class="nav-icon fas fa-solid fa-bicycle"></i>
+                    <p>
+                      Bike Parts
+                    </p>
+                  </a>
+                </li>
 
+                <!-- Item Lists -->
+                <?php
+                function getItemCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS item FROM item_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['item'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $itemCount = getItemCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=item_list" class="nav-link nav-item_list">
                     <i class="nav-icon fas fa-boxes"></i>
                     <p>
                       Item Lists
+                      <span class="badge badge-info right"><?php echo $itemCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -534,11 +994,37 @@
                 </li>
 
                 <!--Low Stock -->
+                <?php
+                $lowStockThreshold = 200;
+                $query = "SELECT i.*, s.name AS supplier,
+                (COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 1), 0) 
+                - COALESCE((SELECT SUM(quantity) FROM stock_list WHERE item_id = i.id AND type = 2), 0)) AS available_stock
+                FROM item_list i
+                INNER JOIN supplier_list s ON i.supplier_id = s.id
+                ORDER BY i.name DESC";
+
+                $result = $conn->query($query);
+
+                if ($result) {
+                  $lowStockItemCount = 0;
+                  if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                      $item_id = $row['id'];
+                      $available_stock = $row['available_stock'];
+
+                      if ($available_stock < $lowStockThreshold) {
+                        $lowStockItemCount++;
+                      }
+                    }
+                  }
+                }
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=low_stock" class="nav-link nav-low_stock">
                     <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>
                       Low Stocks
+                      <span class="badge badge-danger right"><?php echo $lowStockItemCount; ?></span>
                     </p>
                   </a>
                 </li>
@@ -566,31 +1052,91 @@
               </a>
               <ul class="nav nav-treeview">
                 <!--Supplier -->
+                <?php
+                function getSupplierCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS supplier FROM supplier_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['supplier'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $supplierCount = getSupplierCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=supplier" class="nav-link nav-supplier">
                     <i class="nav-icon fas fa-address-book"></i>
                     <p>
                       Suppliers
+                      <span class="badge badge-info right"><?php echo $supplierCount; ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--Requester -->
+                <?php
+                function getRequesterCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS requester FROM requester_list";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['requester'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $requesterCount = getRequesterCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=requester" class="nav-link nav-requester">
                     <i class="nav-icon fas fa-address-book"></i>
                     <p>
                       Requesters
+                      <span class="badge badge-info right"><?php echo $requesterCount ?></span>
                     </p>
                   </a>
                 </li>
 
                 <!--System Users -->
+                <?php
+                function getUserCount3()
+                {
+                  global $conn;
+
+                  $qry = "SELECT COUNT(*) AS user FROM users WHERE id != 1";
+                  $result = $conn->query($qry);
+
+                  if ($result) {
+                    $row = $result->fetch_assoc();
+                    return $row['user'];
+                  } else {
+
+                    return 0;
+                  }
+                }
+
+                $userCount = getUserCount3();
+                ?>
                 <li class="nav-item">
                   <a href="<?php echo base_url ?>admin/?page=system_user/profile_list" class="nav-link nav-system_user">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
                       System Users
+                      <span class="badge badge-info right"><?php echo $userCount ?></span>
                     </p>
                   </a>
                 </li>
@@ -617,23 +1163,6 @@
     <!-- /.sidebar -->
   </aside>
 
-
-  <!--script>
-    var page;
-    $(document).ready(function(){
-        page = '<-?php echo isset($_GET['page']) ? $_GET['page'] : 'dashboard' ?>';
-        page = page.replace(/\//gi,'_');
-
-        if($('.nav-link.nav-'+page).length > 0){
-            $('.nav-link.nav-'+page).addClass('active');
-            var parentTreeview = $('.nav-link.nav-'+page).closest('.nav-treeview');
-            var parentNav = parentTreeview.siblings('a');
-
-            parentNav.addClass('active');
-            parentTreeview.parent().addClass('menu-open');
-        }
-    });
-  </script-->
   <script>
     var page;
     $(document).ready(function() {
