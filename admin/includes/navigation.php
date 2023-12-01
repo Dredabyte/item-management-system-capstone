@@ -14,7 +14,7 @@
           <img src="<?php echo validate_image($_settings->userdata('avatar')) ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <div class="text-muted toastrDefaultInfo"><?php echo ucwords($_settings->userdata('firstname') . ' - ' . $_settings->userdata('role')) ?></div>
+          <div class="text-muted toastrDefaultInfo" style="cursor: pointer;"><?php echo ucwords($_settings->userdata('firstname') . ' - ' . $_settings->userdata('role')) ?></div>
         </div>
       </div>
 
@@ -86,7 +86,7 @@
                   <a href="<?php echo base_url ?>admin/?page=inventory_request" class="nav-link nav-inventory_request">
                     <i class="nav-icon fas fa-solid fa-envelope-open-text"></i>
                     <p>
-                      Inventory Request
+                      Item Request
                       <span class="badge badge-info right"><?php echo $requestCount; ?></span>
                     </p>
                   </a>
@@ -782,7 +782,7 @@
                   <a href="<?php echo base_url ?>admin/?page=inventory_request" class="nav-link nav-inventory_request">
                     <i class="nav-icon fas fa-solid fa-envelope-open-text"></i>
                     <p>
-                      Inventory Request
+                      Item Request
                       <span class="badge badge-info right"><?php echo $requestCount; ?></span>
                     </p>
                   </a>
@@ -844,16 +844,6 @@
                     <p>
                       Back Order List
                       <span class="badge badge-info right"><?php echo $boCount; ?></span>
-                    </p>
-                  </a>
-                </li>
-
-                <!--Dispense Product -->
-                <li class="nav-item">
-                  <a href="<?php echo base_url ?>admin/?page=outgoing_stock/manage_outgoing_stock" class="nav-link nav-dispense">
-                    <i class="nav-icon fas fa-share-from-square"></i>
-                    <p>
-                      Dispense Product
                     </p>
                   </a>
                 </li>

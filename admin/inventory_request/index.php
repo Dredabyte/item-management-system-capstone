@@ -1,5 +1,5 @@
 <!--Title Header-->
-<title>Item Management System - Inventory Request List</title>
+<title>Item Management System - Item Request List</title>
 <!--Title Header ends-->
 
 <!-- Content Wrapper. Contains page content -->
@@ -9,13 +9,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Inventory Request List</h1>
-        <p class="mb-0">The inventory request list was submitted to the procurement department to replenish essential supplies for the upcoming project. It meticulously detailed the specific items, quantities, and delivery deadlines to ensure a smooth and efficient restocking process.</p>
+        <h1 class="m-0">Item Request Lists</h1>
+        <p class="mb-0">The item request list was submitted to the procurement department to replenish essential supplies for the upcoming project. It meticulously detailed the specific items, quantities, and delivery deadlines to ensure a smooth and efficient restocking process.</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="./">Dashboard</a></li>
-          <li class="breadcrumb-item active">Inventory Request List</li>
+          <li class="breadcrumb-item active">Item Request List</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->

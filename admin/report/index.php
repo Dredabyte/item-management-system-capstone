@@ -126,26 +126,33 @@
                     $sql = "SELECT * FROM $tableName WHERE DATE(date_created) BETWEEN '$start_date' AND '$end_date' ORDER BY DATE(date_created) ASC";
                     $query = $conn->query($sql);
 
-                    $totalAmount = 0; // Initialize the total amount variable
+                    // Check if any records were found
+                    if ($query->num_rows > 0) {
+                      $totalAmount = 0; // Initialize the total amount variable
 
-                    while ($row = $query->fetch_assoc()) {
+                      echo '<h3>' . $tableTitle . '</h3>';
+
+                      while ($row = $query->fetch_assoc()) {
+                        echo '<tr>';
+                        echo '<td class="py-1 px-2 text-center">' . date('F j, Y g:i A', strtotime($row['date_created'])) . '</td>';
+                        echo '<td class="py-1 px-2 text-center">' . $row['stock_ids'] . '</td>';
+                        echo '<td class="py-1 px-2 text-center">₱ ' . number_format($row['amount'], 2) . '</td>';
+                        echo '</tr>';
+
+                        // Accumulate the grand total for each row
+                        $totalAmount += $row['amount'];
+                      }
+
+                      echo '<tfoot>';
                       echo '<tr>';
-                      echo '<td class="py-1 px-2 text-center">' . date ('F j, Y g:i A', strtotime($row['date_created'])) . '</td>';
-                      echo '<td class="py-1 px-2 text-center">' . $row['stock_ids'] . '</td>';
-                      echo '<td class="py-1 px-2 text-center">₱ ' . number_format($row['amount'], 2) . '</td>';
+                      echo '<td colspan="2" class="py-1 px-2 text-center">Total Amount</td>';
+                      echo '<td>₱ ' . number_format($totalAmount, 2) . '</td>';
                       echo '</tr>';
-
-                      // Accumulate the grand total for each row
-                      $totalAmount += $row['amount'];
+                      echo '</tfoot>';
+                    } else {
+                      // No records found message
+                      echo '<p>No records found for the selected date range.</p>';
                     }
-                    echo '<tfoot>';
-                    echo '<tr>';
-                    echo '<td colspan="2" class="py-1 px-2 text-center">Total Amount</td>';
-                    echo '<td>₱ ' . number_format($totalAmount, 2) . '</td>';
-                    echo '</tr>';
-                    echo '</tfoot>';
-
-                    echo '<h3>' . $tableTitle . '</h3>';
                   }
                   ?>
                 </tbody>
@@ -201,7 +208,7 @@
         '<div class="col-10">' +
         '<h4 class="text-center"><?php echo $_settings->info('name') ?></h4>' +
         '<h4 class="text-center">Report</h4>' +
-        '<h5 class="text-left">Printed by: <?php echo ucwords($_settings->userdata('firstname'). ' '.$_settings->userdata('lastname'). ' - '.$_settings->userdata('role')) ?></h5>' +
+        '<h5 class="text-left">Printed by: <?php echo ucwords($_settings->userdata('firstname') . ' ' . $_settings->userdata('lastname') . ' - ' . $_settings->userdata('role')) ?></h5>' +
         '</div>' +
         '<div class="col-1 text-right">' +
         '</div>' +

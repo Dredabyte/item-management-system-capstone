@@ -9,12 +9,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">DRIVETRAIN PARTS</h1>
+                <h1 class="m-0">TUBES AND TIRES</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?php echo base_url ?>admin/?page=bike_parts">Bike Parts & Components</a></li>
-                    <li class="breadcrumb-item active">Drivetrain</li>
+                    <li class="breadcrumb-item active">Tubes and Tires</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $selectedCategoryIds = [14, 8, 12, 9, 11, 15, 13, 36, 46]; // An array of category IDs
+                                $selectedCategoryIds = [18, 19]; // An array of category IDs
 
                                 $categoryIdsString = implode(',', $selectedCategoryIds);
 
