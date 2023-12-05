@@ -32,6 +32,7 @@
           <div class="card-header">
             <h3 class="card-title"></h3>
             <div class="card-tools">
+              <?php if ($_settings->userdata('type') == !3) : ?>
               <div class="input-group-append">
                 <a href="<?php echo base_url ?>admin/?page=inventory_request/manage_inventory_request" class="btn btn-block btn-outline-dark">
                   Create Request
@@ -39,6 +40,7 @@
                 </a>
               </div>
             </div>
+            <?php endif; ?>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
