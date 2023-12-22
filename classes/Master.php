@@ -148,7 +148,7 @@ class Master extends DBConnection
 	{
 		extract($_POST);
 		$data = "";
-	
+
 		foreach ($_POST as $k => $v) {
 			if (!in_array($k, array('id'))) {
 				$v = $this->conn->real_escape_string($v);
@@ -156,40 +156,40 @@ class Master extends DBConnection
 				$data .= " `{$k}`='{$v}' ";
 			}
 		}
-	
+
 		$check = $this->conn->query("SELECT * FROM `item_list` where `name` = '{$name}' and `supplier_id` = '{$supplier_id}' " . (!empty($id) ? " and id != {$id} " : "") . " ")->num_rows;
-	
+
 		if ($this->capture_err())
 			return $this->capture_err();
-	
+
 		$resp = [];
-	
+
 		if ($check > 0) {
 			$resp['status'] = 'failed';
 			$resp['msg'] = "Item already exists under the selected supplier.";
 			return json_encode($resp);
 		}
-	
+
 		if (isset($_FILES['image']) && $_FILES['image']['tmp_name'] != '') {
 			$fname = 'item_image/item_image-' . uniqid() . '.png';
 			$dir_path = base_app . $fname;
 			$upload = $_FILES['image']['tmp_name'];
 			$type = mime_content_type($upload);
 			$allowed = array('image/png', 'image/jpeg');
-	
+
 			if (!in_array($type, $allowed)) {
 				$resp['msg'] = "Image failed to upload due to an invalid file type.";
 			} else {
 				$new_height = 300;
 				$new_width = 400;
-	
+
 				list($width, $height) = getimagesize($upload);
 				$t_image = imagecreatetruecolor($new_width, $new_height);
 				imagealphablending($t_image, false);
 				imagesavealpha($t_image, true);
 				$gdImg = ($type == 'image/png') ? imagecreatefrompng($upload) : imagecreatefromjpeg($upload);
 				imagecopyresampled($t_image, $gdImg, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-	
+
 				if ($gdImg) {
 					if (is_file($dir_path))
 						unlink($dir_path);
@@ -200,20 +200,20 @@ class Master extends DBConnection
 					$resp['msg'] = "Image failed to upload due to an unknown reason.";
 				}
 			}
-	
+
 			if (isset($uploaded_img)) {
 				$this->conn->query("UPDATE item_list SET `image` = CONCAT('{$fname}','?v=',UNIX_TIMESTAMP(CURRENT_TIMESTAMP)) WHERE id = '{$id}' ");
 			}
 		}
-	
+
 		if (empty($id)) {
 			$sql = "INSERT INTO `item_list` SET `image` = '{$fname}', {$data}";
 		} else {
 			$sql = "UPDATE `item_list` SET {$data} WHERE id = '{$id}'";
 		}
-	
+
 		$save = $this->conn->query($sql);
-	
+
 		if ($save) {
 			$resp['status'] = 'success';
 			if (empty($id))
@@ -224,10 +224,10 @@ class Master extends DBConnection
 			$resp['status'] = 'failed';
 			$resp['err'] = $this->conn->error . "{$sql}";
 		}
-	
+
 		return json_encode($resp);
 	}
-	
+
 
 	//delete item
 	function delete_item()
@@ -1048,9 +1048,28 @@ class Master extends DBConnection
 		}
 		return json_encode($resp);
 	}
+
+	// update/approve status of inventory request
+	function approve_request()
+	{
+		extract($_POST);
+
+		// Assuming $id is the identifier of the record to be updated
+		$update = $this->conn->query("UPDATE `inventory_request_list` SET status = '1' WHERE id = '{$id}'");
+
+		// Check if the update was successful
+		if ($update) {
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success', "Item Request successfully approved.");
+		} else {
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+			return json_encode($resp);
+		}
+
+		return json_encode($resp);
+	}
 }
-
-
 
 $Master = new Master();
 $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
@@ -1121,6 +1140,9 @@ switch ($action) {
 		break;
 	case 'save_brand':
 		echo $Master->save_brand();
+		break;
+	case 'approve_request':
+		echo $Master->approve_request();
 		break;
 	case 'delete_brand':
 		echo $Master->delete_brand();

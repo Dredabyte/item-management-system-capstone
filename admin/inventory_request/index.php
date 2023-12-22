@@ -33,14 +33,14 @@
             <h3 class="card-title"></h3>
             <div class="card-tools">
               <?php if ($_settings->userdata('type') == 1) : ?>
-              <div class="input-group-append">
-                <a href="<?php echo base_url ?>admin/?page=inventory_request/manage_inventory_request" class="btn btn-block btn-outline-dark">
-                  Create Request
-                  <i class="fas fa-plus"></i>
-                </a>
-              </div>
+                <div class="input-group-append">
+                  <a href="<?php echo base_url ?>admin/?page=inventory_request/manage_inventory_request" class="btn btn-block btn-outline-dark">
+                    Create Request
+                    <i class="fas fa-plus"></i>
+                  </a>
+                </div>
             </div>
-            <?php endif; ?>
+          <?php endif; ?>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -53,6 +53,7 @@
                   <th>Prepared By</th>
                   <th>Item/s</th>
                   <th>Amount</th>
+                  <th>Status</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -71,11 +72,26 @@
                     <td><?php echo number_format($row['items']) ?></td>
                     <td>₱ <?php echo number_format($row['amount'], 2) ?></td>
                     <td>
+                      <?php if ($row['status'] == 0) : ?>
+                        <span class="badge badge-primary rounded-pill">Pending</span>
+                      <?php elseif ($row['status'] == 1) : ?>
+                        <span class="badge badge-success rounded-pill">Approved</span>
+                      <?php endif; ?>
+                    </td>
+                    <td>
                       <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
                         Action
                         <span class="sr-only">Toggle Dropdown</span>
                       </button>
                       <div class="dropdown-menu" role="menu">
+                        <?php if ($_settings->userdata('type') == 3) : ?>
+                          <?php if ($row['status'] == 0) : ?>
+                            <a class="dropdown-item" href="javascript:void(0)" onclick="approveRequest(<?php echo $row['id']; ?>)">
+                              <span class="fa fa-check-to-slot text-success"></span> Approved
+                            </a>
+                            <div class="dropdown-divider"></div>
+                          <?php endif; ?>
+                        <?php endif; ?>
                         <a class="dropdown-item" href="<?php echo base_url . 'admin?page=inventory_request/view_inventory_request&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-eye text-dark"></span> View</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?php echo base_url . 'admin?page=inventory_request/manage_inventory_request&id=' . $row['id'] ?>" data-id="<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
@@ -158,5 +174,30 @@
         }
       }
     })
+  }
+
+  function approveRequest(requestId) {
+    start_loader();
+    $.ajax({
+      url: _base_url_ + "classes/Master.php?f=approve_request",
+      method: "POST",
+      data: {
+        id: requestId
+      },
+      dataType: "json",
+      error: function(err) {
+        console.log(err);
+        alert_toast("An error occurred.", 'error');
+        end_loader();
+      },
+      success: function(resp) {
+        if (typeof resp === 'object' && resp.success) {
+          location.reload();
+        } else {
+          alert_toast("An error occurred.", 'error');
+          end_loader();
+        }
+      }
+    });
   }
 </script>
