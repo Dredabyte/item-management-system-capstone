@@ -67,7 +67,7 @@
                 {
                   global $conn;
 
-                  $qry = "SELECT COUNT(*) AS request_count FROM inventory_request_list";
+                  $qry = "SELECT COUNT(*) AS request_count FROM inventory_request_list WHERE status = 0";
                   $result = $conn->query($qry);
 
                   if ($result) {
@@ -681,7 +681,7 @@
                 {
                   global $conn;
 
-                  $qry = "SELECT COUNT(*) AS request_count FROM inventory_request_list";
+                  $qry = "SELECT COUNT(*) AS request_count FROM inventory_request_list WHERE status = 0";
                   $result = $conn->query($qry);
 
                   if ($result) {

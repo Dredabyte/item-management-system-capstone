@@ -45,6 +45,18 @@ if ($qry->num_rows > 0) {
                         <div><?php echo isset($firstname) ? $firstname . ' ' . $lastname . ' (' . $role . ')' : '' ?></div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <label class="control-label text-info">Status</label>
+                    <div>
+                        <?php
+                            if (isset($status)) {
+                                $statusText = ($status == 0) ? 'Pending' : (($status == 1) ? 'Approved' : '');
+                                $badgeClass = ($status == 0) ? 'badge-info' : (($status == 1) ? 'badge-success' : '');
+                                echo '<div class="badge ' . $badgeClass . ' rounded-pill">' . $statusText . '</div>';
+                            }
+                        ?>
+                    </div>
+                </div>
             </div>
             <h4 class="text-info">Items</h4>
             <table class="table table-striped table-bordered" id="list">
@@ -103,6 +115,11 @@ if ($qry->num_rows > 0) {
         </div>
     </div>
     <div class="card-footer py-1 text-center">
+        <?php if ($_settings->userdata('type') == 3) : ?>
+            <?php if ($status == 0) : ?>
+                <a class="btn btn-outline-success approve" data-id="<?php echo $id; ?>"><span class="fa fa-check-to-slot"></span> Approved</a>
+            <?php endif; ?>
+        <?php endif; ?>
         <button class="btn btn-success" type="button" id="print">Print</button>
         <a class="btn btn-primary" href="<?php echo base_url.'/admin?page=inventory_request/manage_inventory_request&id='.(isset($id) ? $id : '') ?>">Edit</a>
         <a class="btn btn-dark" href="<?php echo base_url.'/admin?page=inventory_request' ?>">Back To List</a>
@@ -132,7 +149,13 @@ if ($qry->num_rows > 0) {
     </tr>
 </table>
 <script>
-    
+
+    $(document).ready(function() {
+    $('.approve').click(function() {
+      _conf("Do you want to approve this Inventory Request? Please review it before giving your approval.", "approve_ir", [$(this).attr('data-id')])
+    })
+    })
+
     $(function(){
         $('#print').click(function(){
             start_loader()
@@ -167,4 +190,29 @@ if ($qry->num_rows > 0) {
                      }, 500);
         })
     })
+
+    function approve_ir($id) {
+    start_loader();
+    $.ajax({
+        url: _base_url_ + "classes/Master.php?f=approve_ir",
+        method: "POST",
+        data: {
+            id: $id
+        },
+        dataType: "json",
+        error: function(err) {
+            console.log(err);
+            alert_toast("An error occurred.", 'error');
+            end_loader();
+        },
+        success: function(resp) {
+            if (typeof resp == 'object' && resp.status == 'success') {
+                location.reload();
+            } else {
+                alert_toast("An error occurred.", 'error');
+                end_loader();
+            }
+        }
+    });
+    }
 </script>

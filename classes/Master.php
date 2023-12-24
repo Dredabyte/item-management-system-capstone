@@ -1049,26 +1049,24 @@ class Master extends DBConnection
 		return json_encode($resp);
 	}
 
-	// update/approve status of inventory request
-	function approve_request()
+	// approve item request form
+	function approve_ir()
 	{
 		extract($_POST);
 
-		// Assuming $id is the identifier of the record to be updated
-		$update = $this->conn->query("UPDATE `inventory_request_list` SET status = '1' WHERE id = '{$id}'");
+		$update = $this->conn->query("UPDATE `inventory_request_list` SET `status` = 1 WHERE `id` = '{$id}'");
 
-		// Check if the update was successful
 		if ($update) {
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success', "Item Request successfully approved.");
+			$this->settings->set_flashdata('success', "The inventory request has been successfully approved.");
 		} else {
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
-			return json_encode($resp);
 		}
 
 		return json_encode($resp);
 	}
+
 }
 
 $Master = new Master();
@@ -1141,8 +1139,8 @@ switch ($action) {
 	case 'save_brand':
 		echo $Master->save_brand();
 		break;
-	case 'approve_request':
-		echo $Master->approve_request();
+	case 'approve_ir':
+		echo $Master->approve_ir();
 		break;
 	case 'delete_brand':
 		echo $Master->delete_brand();
